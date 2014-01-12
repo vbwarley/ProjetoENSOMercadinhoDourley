@@ -12,6 +12,7 @@ public class SistemaFinal {
 
 	
 	//OLHA EU AQUI!!!
+	//Testando çaporra
 	//private static Facade fachada = new Facade();
 
 	/**
