@@ -1,3 +1,5 @@
+// Toda esta classe vai ser remodelada para implementação do Hibernate.
+
 package Persistencia;
 
 import java.sql.*;
