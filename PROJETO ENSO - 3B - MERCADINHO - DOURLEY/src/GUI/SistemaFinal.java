@@ -1,3 +1,4 @@
+// Esta classe tem de ser bem remodelada para implementação do Swing.
 package GUI;
 
 import java.sql.Date;
