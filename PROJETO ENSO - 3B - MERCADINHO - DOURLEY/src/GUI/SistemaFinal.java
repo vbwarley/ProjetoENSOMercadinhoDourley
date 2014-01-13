@@ -11,16 +11,6 @@ import Negocios.Facade;
 //Sistema visualisado pelo caixa
 public class SistemaFinal {
 
-	
-	//OLHA EU AQUI!!!
-	////OLHA EU AQUI DE NOVO!
-<<<<<<< HEAD
-	//Testando!!!
-	
-=======
->>>>>>> branch 'master' of https://github.com/vbwarley/ProjetoENSOMercadinhoDourley.git
-	//private static Facade fachada = new Facade();
-	// Aqui é o warley
 	/**
 	 * Menu onde será mostrado as opções para o usuário.
 	 */
