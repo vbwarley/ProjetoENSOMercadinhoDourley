@@ -284,6 +284,7 @@ public class SistemaFinal {
 	 **/
 	public static void main(String [] args) {
 		ClasseGrafica grafica = new ClasseGrafica();
-		grafica.enable();
+		
+		
 	}
 }

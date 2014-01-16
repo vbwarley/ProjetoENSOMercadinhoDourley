@@ -30,10 +30,8 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		
 		painel.add(botao);
 		add(painel);
-			
-		ClasseGrafica grafica = new ClasseGrafica();
 		
-		botao.addActionListener(grafica);
+		botao.addActionListener(this);
 				
 	}
 	
