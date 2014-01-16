@@ -283,6 +283,7 @@ public class SistemaFinal {
 	 * Método principal
 	 **/
 	public static void main(String [] args) {
-		menu();
+		ClasseGrafica grafica = new ClasseGrafica();
+		grafica.enable();
 	}
 }
