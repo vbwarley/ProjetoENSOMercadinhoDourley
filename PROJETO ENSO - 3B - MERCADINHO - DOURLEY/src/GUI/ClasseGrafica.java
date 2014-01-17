@@ -24,19 +24,19 @@ import javax.swing.border.EmptyBorder;
 
 public class ClasseGrafica extends JFrame implements ActionListener{
 
-	private JLabel jLabel;
 	private JPanel painel;
-	private JButton botao;
-	private JTextField campoTexto;
-	private FlowLayout layout;
-	
+	private JButton botaoOkProdutos;	
+	private JButton botaoOkManterProdutos;	
+	private JButton botaoOkCadastrarVenda;
+	private JButton botaoOkConsultarVenda;
+	private JButton botaoOkSair;
+	private JButton botaoOkIncluir;
+	private JButton botaoOkAlterar;
+	private JButton botaoOkConsultar;
+	private JButton botaoOkExcluir;
+	private JButton botaoOkSairProdutos;
 	
 	public ClasseGrafica () {
-		/*
-		"1 - Manter Produtos\n" +
-				"2 - Cadastrar Venda\n" +
-				"3 - Consultar Venda\n" +
-				"4 - Sair\n\n"*/
 		
 		super("Mercadinho do Zé");
 		
@@ -45,43 +45,61 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		center();
 		
-		this.setLayout(new BorderLayout());
-		((JComponent) this.getContentPane()).setBorder(new EmptyBorder(4, 4, 4, 4));
-		
 		painel = new JPanel();
 		painel.setBorder(BorderFactory.createTitledBorder("Menu"));
 		painel.setLayout(new GridBagLayout());
-		painel.setSize(new Dimension(300, 300));
+		painel.setSize(new Dimension(500, 500));
 		
 		GridBagConstraints grid = new GridBagConstraints();
+		grid.insets = new Insets(4, 4, 4, 4);
 		
 		grid.gridx = 0;
 		grid.gridy = 0;
-		
-		botao = new JButton("OK");
-		botao.addActionListener(this);
-		
-		jLabel = new JLabel("Manter produtos ");
-		
-		this.add(BorderLayout.NORTH, painel);
-		painel.add(jLabel, grid);
+		JLabel labelManterProdutos = new JLabel("Manter produtos");
+		painel.add(labelManterProdutos, grid);
 		
 		grid.gridx = 1;
 		grid.gridy = 0;		
+		botaoOkManterProdutos = new JButton("OK");
+		botaoOkManterProdutos.addActionListener(this);
+		painel.add(botaoOkManterProdutos, grid);
 		
-		painel.add(botao, grid);
+		grid.gridx = 0;
+		grid.gridy = 1;
+		JLabel labelCadastrarVenda = new JLabel("Cadastrar venda");
+		painel.add(labelCadastrarVenda, grid);
 		
+		grid.gridx = 1;
+		grid.gridy = 1;		
+		botaoOkCadastrarVenda = new JButton("OK");
+		botaoOkCadastrarVenda.addActionListener(this);
+		painel.add(botaoOkCadastrarVenda, grid);
 		
-	}
-	
-	public void actionPerformed(ActionEvent e) {
-	
-		if (e.getSource() == botao){
-			painel.setVisible(false);
-			painelManterProdutos();
-		}
+		grid.gridx = 0;
+		grid.gridy = 2;		
+		JLabel labelConsultarVenda = new JLabel("Consultar venda");
+		painel.add(labelConsultarVenda, grid);
 		
-	}
+		grid.gridx = 1;
+		grid.gridy = 2;		
+		botaoOkConsultarVenda = new JButton("OK");
+		botaoOkConsultarVenda.addActionListener(this);
+		painel.add(botaoOkConsultarVenda, grid);
+		
+		grid.gridx = 0;
+		grid.gridy = 2;		
+		JLabel labelSair = new JLabel("Consultar venda");
+		painel.add(labelConsultarVenda, grid);
+		
+		grid.gridx = 1;
+		grid.gridy = 2;		
+		botaoOkSair = new JButton("OK");
+		botaoOkSair.addActionListener(this);
+		painel.add(botaoOkSair, grid);
+		
+		this.add(BorderLayout.PAGE_START, painel);
+		
+}
 	
 	private void center(){
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -97,13 +115,82 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	
 	private void painelManterProdutos() {
 		
+		JPanel painelManterProdutos = new JPanel();
+		painelManterProdutos.setBorder(BorderFactory.createTitledBorder("Manter produtos"));
+		painelManterProdutos.setLayout(new GridBagLayout());
+		painelManterProdutos.setSize(new Dimension(500, 500));
+		
+		GridBagConstraints gridVendas = new GridBagConstraints();
+		gridVendas.insets = new Insets(4, 4, 4, 4);
+		
+		gridVendas.gridx = 0;
+		gridVendas.gridy = 0;
+		JLabel opcIncluir = new JLabel("Incluir");
+		painelManterProdutos.add(opcIncluir, gridVendas);
+		
+		gridVendas.gridx = 1;
+		gridVendas.gridy = 0;
+		botaoOkIncluir = new JButton("OK");
+		botaoOkIncluir.addActionListener(this);
+		painelManterProdutos.add(botaoOkIncluir, gridVendas);
+				
+		gridVendas.gridx = 0;
+		gridVendas.gridy = 1;
+		JLabel opcAlterar = new JLabel("Alterar");
+		painelManterProdutos.add(opcAlterar, gridVendas);
+		
+		gridVendas.gridx = 1;
+		gridVendas.gridy = 1;
+		botaoOkAlterar = new JButton("OK");
+		botaoOkAlterar.addActionListener(this);
+		painelManterProdutos.add(botaoOkAlterar, gridVendas);
+		
+		gridVendas.gridx = 0;
+		gridVendas.gridy = 2;
+		JLabel opcConsultar = new JLabel("Consultar");
+		painelManterProdutos.add(opcConsultar, gridVendas);
+		
+		gridVendas.gridx = 1;
+		gridVendas.gridy = 2;
+		botaoOkConsultar = new JButton("OK");
+		botaoOkConsultar.addActionListener(this);
+		painelManterProdutos.add(botaoOkConsultar, gridVendas);
+				
+		gridVendas.gridx = 0;
+		gridVendas.gridy = 3;
+		JLabel opcExcluir = new JLabel("Excluir");
+		painelManterProdutos.add(opcExcluir, gridVendas);
+		
+		gridVendas.gridx = 1;
+		gridVendas.gridy = 3;
+		botaoOkExcluir = new JButton("OK");
+		botaoOkExcluir.addActionListener(this);
+		painelManterProdutos.add(botaoOkExcluir, gridVendas);
+				
+		gridVendas.gridx = 0;
+		gridVendas.gridy = 4;
+		JLabel opcSair = new JLabel("Voltar...");
+		painelManterProdutos.add(opcSair, gridVendas);
+		
+		gridVendas.gridx = 1;
+		gridVendas.gridy = 4;
+		botaoOkSairProdutos = new JButton("OK");
+		botaoOkSairProdutos.addActionListener(this);
+		painelManterProdutos.add(botaoOkSairProdutos, gridVendas);
+		
+		painelManterProdutos.setVisible(true);
+		this.add(BorderLayout.BEFORE_FIRST_LINE, painelManterProdutos);
+		
+	}
+	
+	private void painelCadastrarVenda() {
+		
 		JPanel painelProdutos = new JPanel();
 		painelProdutos = new JPanel();
-		painelProdutos.setBorder(BorderFactory.createTitledBorder("Menu de vendas"));
+		painelProdutos.setBorder(BorderFactory.createTitledBorder("Cadastrar venda"));
 		painelProdutos.setSize(new Dimension(500, 500));
-		painelProdutos.setLayout(new GridBagLayout());
 		
-		this.add(BorderLayout.NORTH, painelProdutos);
+		this.add(BorderLayout.BEFORE_FIRST_LINE, painelProdutos);
 		
 		GridBagConstraints gridVendas = new GridBagConstraints();
 		gridVendas.insets = new Insets(4, 4, 4, 4);
@@ -111,22 +198,34 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		gridVendas.gridx = 0;
 		gridVendas.gridy = 0;
 		
-		
-		JLabel opcIncluir = new JLabel("Incluir");
+		JLabel opcIncluir = new JLabel("Produto");
+		JTextField nomeProduto = new JTextField(20);
 		
 		painelProdutos.add(opcIncluir, gridVendas);
 		
-
 		gridVendas.gridx = 1;
 		gridVendas.gridy = 0;
 		
-		JButton botaoOk = new JButton("OK");
+		botaoOkProdutos = new JButton("OK");
+		botaoOkProdutos.addActionListener(this);
 		
-		painelProdutos.add(botaoOk);
-		
-		
+		painelProdutos.add(botaoOkProdutos, gridVendas);
+				
 		painelProdutos.setVisible(true);
 		
 	}
+
+	public void actionPerformed(ActionEvent e) {
+		
+		if (e.getSource() == botaoOkManterProdutos){
+			painel.setVisible(false);
+			painelManterProdutos();
+		} else if(e.getSource() == botaoOkCadastrarVenda){
+			painel.setVisible(false);
+			painelManterProdutos();
+		}
+		
+	}
+
 	
 }
