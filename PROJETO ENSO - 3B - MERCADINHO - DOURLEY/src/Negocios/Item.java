@@ -1,33 +1,52 @@
 package Negocios;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+@Entity(name="ItemVenda")
 public class Item {
-
+	@Id
+	@GeneratedValue
 	private int codItem = 0;
-	private int codProduto = 0;	
-	private int codVenda = 0;
-	private int qtdProduto;
+	
+	private int qtdProduto = 0;
 	private float custo = 0;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="codProduto", nullable=false)
+	private Produto produto;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="codVenda", nullable=false)
+	private Venda venda;
 
-
+	public Item() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	/**
 	 * Método construtor de Item
 	 */
-	public Item (int codProduto, int qtdProduto)
-	{ 
-		this.codItem++;
-		this.codProduto = codProduto;
+	public Item (Produto produto, int qtdProduto) { 
+		//this.codItem++;
+		this.produto = produto;
 		this.qtdProduto = qtdProduto;
+		this.custo = produto.getPrecoProduto() * this.qtdProduto;
 	}
 
 	/**
 	 * Metodo para obter o valor de cada item
 	 */
-	public float obtemValorDoItem()
-	{
-		float resultado = Produto.consultarProduto(codProduto).getPrecoProduto() * this.qtdProduto;
-		return resultado;
-	}
+//	public float obtemValorDoItem()
+//	{
+//		float resultado = Produto.consultarProduto(codProduto).getPrecoProduto() * this.qtdProduto;
+//		return resultado;
+//	}
 
 	/**
 	 * Retorna o codigo do item
@@ -50,27 +69,7 @@ public class Item {
 		this.qtdProduto += qtd;
 	}
 
-	/**
-	 * Retorna o codigo do produto
-	 */
-	public int getCodProduto() {
-		return codProduto;
-	}
-
-	/**
-	 * Atribui o codigo da venda associada
-	 */
-	public void setCodigoVenda(int codigo) {
-		this.codVenda = codigo;
-	}
-
-	/**
-	 * Retorna o codigo da venda associada
-	 */
-	public int getCodigoVenda() {
-		return codVenda;
-	}
-
+	
 	/**
 	 * Atribui o custo do item (recebendo o custo como parâmetro)
 	 */
@@ -81,9 +80,9 @@ public class Item {
 	/**
 	 * Calcula o custo do item e o atribui ao atributo "custo";
 	 */
-	public void setCusto() {
-		this.custo = obtemValorDoItem();
-	}
+//	public void setCusto() {
+//		this.custo = obtemValorDoItem();
+//	}
 
 	/**
 	 * Retorna o custo do item
@@ -92,11 +91,34 @@ public class Item {
 		return custo;
 	}
 
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+
+	public Venda getVenda() {
+		return venda;
+	}
+
+	public void setVenda(Venda venda) {
+		this.venda = venda;
+	}
+
+	public void setCodItem(int codItem) {
+		this.codItem = codItem;
+	}
+	
+	
+	
 	/**
 	 * Retorna uma string com os vlores do item
 	 */
 	public String toString() {
-		return String.format("\n%s\t%d\t%.2f\n\n", Produto.consultarProduto(codProduto), qtdProduto, custo);
+		
+		return String.format("\n%s\t%d\t%.2f\n\n", produto.toString(), qtdProduto, custo);
 	}
 
 }

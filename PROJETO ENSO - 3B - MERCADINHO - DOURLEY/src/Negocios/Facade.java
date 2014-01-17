@@ -77,6 +77,7 @@ public class Facade {
 	 *Consulta vendas de uma determinada data 
 	 */
 	public static void consultarVenda(Date data) {
+	
 		String vendaConsultada = Venda.consultar(data);
 
 		if (!vendaConsultada.isEmpty()) {
@@ -108,7 +109,7 @@ public class Facade {
 	 * Calcula o valor total da venda
 	 */
 	public static float valorTotal() {
-		return venda.obtemValorTotal();
+		return venda.getTotal();
 	}
 
 	/**

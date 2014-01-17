@@ -10,7 +10,7 @@ public class Catalogo {
 	 */
 	public static void cadastrarProduto (Produto produto)
 	{
-		produto.setCodProduto(Banco.getInstance().salvarProduto(produto));
+		Banco.getInstance().salvarProduto(produto);
 
 	}
 

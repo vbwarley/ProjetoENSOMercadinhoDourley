@@ -1,11 +1,23 @@
 package Negocios;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Produto {
 
+	@Id
+	@GeneratedValue
 	private int codProduto;
 	private String nomeProduto;
 	private String descricaoProduto;
 	private float precoProduto;
 	private String unidadeProduto;
+	
+	public Produto() {
+		// TODO Auto-generated constructor stub
+	}
 
 
 	/**
@@ -66,6 +78,23 @@ public class Produto {
 	 */
 	public static Produto consultarProduto(int codigo) {
 		return Catalogo.consultarProduto(codigo);
+	}
+	
+	
+	public void setNomeProduto(String nomeProduto) {
+		this.nomeProduto = nomeProduto;
+	}
+
+	public void setDescricaoProduto(String descricaoProduto) {
+		this.descricaoProduto = descricaoProduto;
+	}
+
+	public void setPrecoProduto(float precoProduto) {
+		this.precoProduto = precoProduto;
+	}
+
+	public void setUnidadeProduto(String unidadeProduto) {
+		this.unidadeProduto = unidadeProduto;
 	}
 
 	/**
