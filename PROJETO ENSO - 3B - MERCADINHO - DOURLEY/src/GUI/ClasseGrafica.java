@@ -13,6 +13,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.concurrent.Delayed;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
@@ -20,6 +21,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -41,6 +43,8 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	private JTextField quantidadeProdutoText;
 	private JButton adicionaAoCarrinho;
 	private JButton finalizarVenda;
+	private JTextField dataVendasText;
+	private JButton botaoConsultarVenda;
 	
 	public ClasseGrafica () {
 		
@@ -98,8 +102,8 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		painel.add(labelSair, grid);
 		
 		grid.gridx = 1;
-		grid.gridy = 2;		
-		botaoOkSair = new JButton("OK");
+		grid.gridy = 3;		
+		botaoOkSair = new JButton("Sair");
 		botaoOkSair.addActionListener(this);
 		painel.add(botaoOkSair, grid);
 		
@@ -243,6 +247,39 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		
 	}
 
+private void painelConsultarVenda() {
+		
+		JPanel painelConsultarVenda = new JPanel();
+		painelConsultarVenda.setBorder(BorderFactory.createTitledBorder("Consultar vendas"));
+		painelConsultarVenda.setLayout(new GridBagLayout());
+		painelConsultarVenda.setSize(new Dimension(500, 500));
+		
+		this.add(BorderLayout.BEFORE_FIRST_LINE, painelConsultarVenda);
+		
+		GridBagConstraints gridConsultaVendas = new GridBagConstraints();
+		gridConsultaVendas.insets = new Insets(4, 4, 4, 4);
+		
+		gridConsultaVendas.gridx = 0;
+		gridConsultaVendas.gridy = 0;
+		JLabel dataDasVendasLabel = new JLabel("Data das vendas");
+		painelConsultarVenda.add(dataDasVendasLabel, gridConsultaVendas);
+		
+		gridConsultaVendas.gridx = 1;
+		gridConsultaVendas.gridy = 0;
+		dataVendasText = new JTextField(15);
+		painelConsultarVenda.add(dataVendasText, gridConsultaVendas);
+		
+		gridConsultaVendas.gridx = 2;
+		gridConsultaVendas.gridy = 0;
+		botaoConsultarVenda = new JButton("Consultar");
+		botaoConsultarVenda.addActionListener(this);
+		painelConsultarVenda.add(botaoConsultarVenda, gridConsultaVendas);
+		
+		painelConsultarVenda.setVisible(true);
+		
+	}
+
+	
 	public void actionPerformed(ActionEvent e) {
 		
 		if (e.getSource() == botaoOkManterProdutos){
@@ -251,6 +288,14 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		} else if(e.getSource() == botaoOkCadastrarVenda){
 			painel.setVisible(false);
 			painelCadastrarVenda();
+		} else if (e.getSource() == botaoOkConsultarVenda){
+			painel.setVisible(false);
+			painelConsultarVenda();
+		} else if (e.getSource() == botaoOkSair){
+			JOptionPane.showMessageDialog(null, "Saída do sistema!");
+			
+			System.exit(0);
+			
 		}
 		
 	}
