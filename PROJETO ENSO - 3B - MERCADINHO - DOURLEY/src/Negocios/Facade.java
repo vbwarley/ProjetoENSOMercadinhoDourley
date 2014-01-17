@@ -85,7 +85,7 @@ public class Facade {
 			int codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código da venda a qual deseja detalhar: \n").toString());
 
 			venda = Venda.retornarVenda(codigo);
-			JOptionPane.showMessageDialog(null, new JTextArea(venda.consultarItem(codigo)));
+			JOptionPane.showMessageDialog(null, new JTextArea(venda.mostrarItens()));
 		} else {
 			JOptionPane.showMessageDialog(null, "Não foi encontrada nenhuma venda na data: " + data);
 		}

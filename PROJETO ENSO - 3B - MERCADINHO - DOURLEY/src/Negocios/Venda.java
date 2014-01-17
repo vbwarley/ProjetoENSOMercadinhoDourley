@@ -198,14 +198,12 @@ public class Venda {
 	 * Consulta no banco de dados, atravez da persistência, os itens
 	 * relacionado ao codigo da venda passado como parâmetro.
 	 */
-	public String consultarItem(int codigoVenda) {
-		ArrayList<Item> itensRetornados;
-		itensRetornados = Banco.getInstance().consultarItens(codigoVenda);
-
-		String dadosItens = "Venda: " + codigoVenda + "\t Data: " + data
+	public String mostrarItens() {
+		
+		String dadosItens = "Venda: " + codVenda + "\t Data: " + data
 				+ "\n\nProduto\tQuantidade\tCusto";
 
-		for (Item i : itensRetornados)
+		for (Item i : itens)
 			dadosItens += i.toString();
 
 		dadosItens += "\nTotal da Venda: " + total + "\nPagamento Recebido: "

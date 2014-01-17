@@ -2,16 +2,14 @@
 
 package Persistencia;
 
-import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-
 
 import Negocios.Venda;
 import Negocios.Produto;
@@ -37,7 +35,7 @@ public class Banco {
 	 **/
 	public Collection<Venda> consultarVenda(String data){
 		
-		Query query = manager.createQuery("SELECT v FROM Venda v WHERE data = " + data);
+		Query query = manager.createQuery("SELECT v FROM Venda v WHERE data = '" + data +"'");
 		Collection<Venda> vendas = query.getResultList();
 
 		return vendas;
@@ -52,15 +50,6 @@ public class Banco {
 		Venda venda = manager.find(Venda.class, Integer.valueOf(codigo));
 
 		return venda;
-	}
-
-	/**
-	 *Retorna um ArrayList com todos os itens que estão associados ao código da venda que é recebido como parâmetro 
-	 */
-	public ArrayList<Item> consultarItens(int codigo){
-
-
-		return null;
 	}
 
 	/**
