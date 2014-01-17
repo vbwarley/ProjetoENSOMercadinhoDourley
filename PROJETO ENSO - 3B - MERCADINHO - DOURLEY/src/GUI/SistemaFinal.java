@@ -180,7 +180,6 @@ public class SistemaFinal {
 		} catch (NullPointerException n) {
 			System.exit(1);
 		} catch (Exception e) {
-			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Ocorreu algum erro na digitação dos valores. Por favor, tente novamente.");
 		}
 	}
@@ -284,6 +283,8 @@ public class SistemaFinal {
 	 * Método principal
 	 **/
 	public static void main(String [] args) {
-		menu();
+	
+		new ClasseGrafica();
+		
 	}
 }
