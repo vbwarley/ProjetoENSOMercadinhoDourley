@@ -166,15 +166,16 @@ public class SistemaFinal {
 			} while (opcao == JOptionPane.YES_OPTION);
 
 			if (temItem) {
-				float total = Facade.valorTotal();
-				Facade.setTotalVenda(total);
-				float pagamento = Float.parseFloat(JOptionPane.showInputDialog(null, "Você deve pagar: R$ "+ total).toString());
+//				float total = Facade.valorTotal();
+//				Facade.setTotalVenda(total);
+				// MUDAR AQUI
+				float pagamento = Float.parseFloat(JOptionPane.showInputDialog(null, "Você deve pagar: R$ "+ Facade.valorTotal()).toString());
 
 				if (pagamento > 0) 
 					Facade.setPagamentoVenda(pagamento);
 
 				Facade.cadastrarVenda();
-				Facade.salvarItens();
+				//Facade.salvarItens();
 			}
 		} catch (NullPointerException n) {
 			System.exit(1);
