@@ -35,6 +35,8 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	private JButton botaoOkConsultar;
 	private JButton botaoOkExcluir;
 	private JButton botaoOkSairProdutos;
+	private JButton botaoVerificarExistencia;
+	private JTextField codigoProduto;
 	
 	public ClasseGrafica () {
 		
@@ -97,7 +99,7 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		botaoOkSair.addActionListener(this);
 		painel.add(botaoOkSair, grid);
 		
-		this.add(BorderLayout.PAGE_START, painel);
+		this.add(BorderLayout.BEFORE_FIRST_LINE, painel);
 		
 }
 	
@@ -185,33 +187,34 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	
 	private void painelCadastrarVenda() {
 		
-		JPanel painelProdutos = new JPanel();
-		painelProdutos = new JPanel();
-		painelProdutos.setBorder(BorderFactory.createTitledBorder("Cadastrar venda"));
-		painelProdutos.setSize(new Dimension(500, 500));
+		JPanel painelCadastrarVenda = new JPanel();
+		painelCadastrarVenda.setBorder(BorderFactory.createTitledBorder("Manter produtos"));
+		painelCadastrarVenda.setLayout(new GridBagLayout());
+		painelCadastrarVenda.setSize(new Dimension(500, 500));
 		
-		this.add(BorderLayout.BEFORE_FIRST_LINE, painelProdutos);
+		this.add(BorderLayout.BEFORE_FIRST_LINE, painelCadastrarVenda);
 		
 		GridBagConstraints gridVendas = new GridBagConstraints();
 		gridVendas.insets = new Insets(4, 4, 4, 4);
 		
 		gridVendas.gridx = 0;
 		gridVendas.gridy = 0;
-		
-		JLabel opcIncluir = new JLabel("Produto");
-		JTextField nomeProduto = new JTextField(20);
-		
-		painelProdutos.add(opcIncluir, gridVendas);
+		JLabel codigoProdutoLabel = new JLabel("Codigo do produto");
+		painelCadastrarVenda.add(codigoProdutoLabel, gridVendas);
 		
 		gridVendas.gridx = 1;
 		gridVendas.gridy = 0;
+		codigoProduto = new JTextField(20);
+		painelCadastrarVenda.add(codigoProduto, gridVendas);
 		
-		botaoOkProdutos = new JButton("OK");
-		botaoOkProdutos.addActionListener(this);
-		
-		painelProdutos.add(botaoOkProdutos, gridVendas);
+		gridVendas.gridx = 1;
+		gridVendas.gridy = 1;
+		botaoVerificarExistencia = new JButton("Verificar existencia");
+		botaoVerificarExistencia.addActionListener(this);
+		painelCadastrarVenda.add(botaoVerificarExistencia, gridVendas);
 				
-		painelProdutos.setVisible(true);
+		painelCadastrarVenda.setVisible(true);
+		
 		
 	}
 
@@ -222,7 +225,7 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 			painelManterProdutos();
 		} else if(e.getSource() == botaoOkCadastrarVenda){
 			painel.setVisible(false);
-			painelManterProdutos();
+			painelCadastrarVenda();
 		}
 		
 	}
