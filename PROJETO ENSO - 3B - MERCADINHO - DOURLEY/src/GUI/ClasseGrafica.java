@@ -12,8 +12,10 @@ import java.awt.LayoutManager;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -25,7 +27,6 @@ import javax.swing.border.EmptyBorder;
 public class ClasseGrafica extends JFrame implements ActionListener{
 
 	private JPanel painel;
-	private JButton botaoOkProdutos;	
 	private JButton botaoOkManterProdutos;	
 	private JButton botaoOkCadastrarVenda;
 	private JButton botaoOkConsultarVenda;
@@ -37,6 +38,9 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	private JButton botaoOkSairProdutos;
 	private JButton botaoVerificarExistencia;
 	private JTextField codigoProduto;
+	private JTextField quantidadeProdutoText;
+	private JButton adicionaAoCarrinho;
+	private JButton finalizarVenda;
 	
 	public ClasseGrafica () {
 		
@@ -91,7 +95,7 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		grid.gridx = 0;
 		grid.gridy = 2;		
 		JLabel labelSair = new JLabel("Consultar venda");
-		painel.add(labelConsultarVenda, grid);
+		painel.add(labelSair, grid);
 		
 		grid.gridx = 1;
 		grid.gridy = 2;		
@@ -199,22 +203,43 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		
 		gridVendas.gridx = 0;
 		gridVendas.gridy = 0;
-		JLabel codigoProdutoLabel = new JLabel("Codigo do produto");
+		JLabel codigoProdutoLabel = new JLabel("Código do produto");
 		painelCadastrarVenda.add(codigoProdutoLabel, gridVendas);
 		
 		gridVendas.gridx = 1;
 		gridVendas.gridy = 0;
-		codigoProduto = new JTextField(20);
+		codigoProduto = new JTextField(15);
 		painelCadastrarVenda.add(codigoProduto, gridVendas);
 		
-		gridVendas.gridx = 1;
-		gridVendas.gridy = 1;
-		botaoVerificarExistencia = new JButton("Verificar existencia");
+		gridVendas.gridx = 2;
+		gridVendas.gridy = 0;
+		botaoVerificarExistencia = new JButton("Verificar");
 		botaoVerificarExistencia.addActionListener(this);
 		painelCadastrarVenda.add(botaoVerificarExistencia, gridVendas);
 				
-		painelCadastrarVenda.setVisible(true);
+		gridVendas.gridx = 0;
+		gridVendas.gridy = 2;
+		JLabel quantidadeProdutoLabel = new JLabel("Quantidade");
+		painelCadastrarVenda.add(quantidadeProdutoLabel, gridVendas);
+				
+		gridVendas.gridx = 1;
+		gridVendas.gridy = 2;
+		quantidadeProdutoText = new JTextField(8);
+		painelCadastrarVenda.add(quantidadeProdutoText, gridVendas);
 		
+		gridVendas.gridx = 2;
+		gridVendas.gridy = 2;
+		adicionaAoCarrinho = new JButton("Adicionar");
+		adicionaAoCarrinho.addActionListener(this);
+		painelCadastrarVenda.add(adicionaAoCarrinho, gridVendas);
+		
+		gridVendas.gridx = 1;
+		gridVendas.gridy = 4;
+		finalizarVenda = new JButton("finalizar venda");
+		finalizarVenda.addActionListener(this);
+		painelCadastrarVenda.add(finalizarVenda, gridVendas);
+		
+		painelCadastrarVenda.setVisible(true);
 		
 	}
 
