@@ -11,6 +11,7 @@ import java.util.List;
 
 
 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,6 +27,8 @@ import javax.persistence.TemporalType;
 import Persistencia.Banco;
 
 @Entity
+@NamedQuery(name="Venda.findByDate",
+	query="SELECT v FROM Venda v WHERE data = :data")
 public class Venda {
 
 	@Id
@@ -199,19 +203,6 @@ public class Venda {
 
 		return dadosItens;
 	}
-
-	/**
-	 * Método para obtensão do custo total da venda
-	 */
-//	public float obtemValorTotal() {
-//		float valor = 0;
-//
-//		for (Item i : itens) {
-//			valor += i.obtemValorDoItem();
-//		}
-//
-//		return valor;
-//	}
 
 	/**
 	 * Método para obtensão do troco da venda

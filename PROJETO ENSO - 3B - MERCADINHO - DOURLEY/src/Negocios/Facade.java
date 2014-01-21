@@ -74,19 +74,8 @@ public class Facade {
 	/**
 	 *Consulta vendas de uma determinada data 
 	 */
-	public void consultarVenda(Date data) {
-	
-		String vendaConsultada = Venda.consultar(data);
-
-		if (!vendaConsultada.isEmpty()) {
-			JOptionPane.showMessageDialog(null, new JTextArea(vendaConsultada + "\n"));
-			int codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código da venda a qual deseja detalhar: \n").toString());
-
-			venda = Venda.retornarVenda(codigo);
-			JOptionPane.showMessageDialog(null, new JTextArea(venda.mostrarItens()));
-		} else {
-			JOptionPane.showMessageDialog(null, "Não foi encontrada nenhuma venda na data: " + data);
-		}
+	public String consultarVenda(Date data) {
+		return Venda.consultar(data);
 	}
 
 	/**

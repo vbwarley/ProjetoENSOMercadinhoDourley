@@ -33,20 +33,10 @@ public class Item {
 	 * Método construtor de Item
 	 */
 	public Item (Produto produto, int qtdProduto) { 
-		//this.codItem++;
 		this.produto = produto;
 		this.qtdProduto = qtdProduto;
 		this.custo = produto.getPrecoProduto() * this.qtdProduto;
 	}
-
-	/**
-	 * Metodo para obter o valor de cada item
-	 */
-//	public float obtemValorDoItem()
-//	{
-//		float resultado = Produto.consultarProduto(codProduto).getPrecoProduto() * this.qtdProduto;
-//		return resultado;
-//	}
 
 	/**
 	 * Retorna o codigo do item
@@ -78,13 +68,6 @@ public class Item {
 	}
 
 	/**
-	 * Calcula o custo do item e o atribui ao atributo "custo";
-	 */
-//	public void setCusto() {
-//		this.custo = obtemValorDoItem();
-//	}
-
-	/**
 	 * Retorna o custo do item
 	 */
 	public float getCusto() {
@@ -110,9 +93,7 @@ public class Item {
 	public void setCodItem(int codItem) {
 		this.codItem = codItem;
 	}
-	
-	
-	
+		
 	/**
 	 * Retorna uma string com os vlores do item
 	 */

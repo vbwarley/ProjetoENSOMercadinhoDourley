@@ -1,6 +1,5 @@
 package Negocios;
 
-import javax.swing.JOptionPane;
 import Persistencia.Banco;
 
 public class Catalogo {
@@ -37,35 +36,14 @@ public class Catalogo {
 	 */
 	public static Produto consultarProduto (int codigoProduto)
 	{		
-		Produto produtoRetornado;
-		produtoRetornado = Banco.getInstance().consultarProduto(codigoProduto);
-
-		if (produtoRetornado == null) {
-			JOptionPane.showMessageDialog(null, "Produto não encontrado!");
-		} 
-
-		return produtoRetornado;
+		return Banco.getInstance().consultarProduto(codigoProduto);
 	}
 
 	/**
 	 * Recebe o código do produto para excluí-lo do Banco de dados
 	 */
 	public static void excluirProduto(int codigoProduto) {
-		Produto produtoRetornado;
-		produtoRetornado = consultarProduto(codigoProduto);
-
-		if (produtoRetornado != null) {
-			int opcao = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o "+ produtoRetornado.getNomeProduto() +"?");
-
-			if (opcao == JOptionPane.YES_OPTION) {
-				if (Banco.getInstance().excluirProduto(produtoRetornado.getCodProduto())) {
-					JOptionPane.showMessageDialog(null, "Produto excluído com sucesso!");
-				} else {
-					JOptionPane.showMessageDialog(null, "Produto não foi excluído.");
-				}
-			} else {
-				JOptionPane.showMessageDialog(null, "O produto não foi exclúido.");
-			}
-		}
+		// atenção para caso de produto não cadastrado
+		Banco.getInstance().excluirProduto(consultarProduto(codigoProduto).getCodProduto());		
 	}
 }

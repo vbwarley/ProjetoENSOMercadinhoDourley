@@ -2,18 +2,16 @@
 
 package Persistencia;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import Negocios.Venda;
 import Negocios.Produto;
-import Negocios.Item;;
 
 public class Banco {
 
@@ -33,10 +31,18 @@ public class Banco {
 	 * Consulta de vendas pela data.
 	 * Retorna um ArrayList de todas as vendas realizadas na data digitada.
 	 **/
-	public Collection<Venda> consultarVenda(String data){
+	public List<Venda> consultarVenda(String data){
 		
-		Query query = manager.createQuery("SELECT v FROM Venda v WHERE data = '" + data +"'");
-		Collection<Venda> vendas = query.getResultList();
+		Query query = manager.createQuery("Venda.findByDate");
+		query.setParameter("data", data);
+		
+		List<Venda> vendas = null;
+		
+		try {
+			vendas = query.getResultList();
+		} catch (NoResultException e) {
+			// nada a por aqui
+		}
 
 		return vendas;
 	}
@@ -46,22 +52,24 @@ public class Banco {
 	 *com os dados equivalentes aos da venda encontrada no banco de dados.  
 	 */
 	public Venda retornarVenda(int codigo) {
-
-		Venda venda = manager.find(Venda.class, Integer.valueOf(codigo));
-
+		Venda venda = null;
+		
+		try {
+			venda = manager.find(Venda.class, Integer.valueOf(codigo));
+		} catch (NoResultException e) {
+			// nada a por aqui
+		}
+		
 		return venda;
 	}
 
 	/**
 	 * Salva uma venda no Banco de dados.
 	 */
-	public int salvarVenda(Venda venda){
+	public void salvarVenda(Venda venda){
 		manager.getTransaction().begin();
 		manager.persist(venda);
-//		for (Item i : venda.getItens()) 
-//			manager.persist(i.getProduto());
 		manager.getTransaction().commit();
-		return 0;
 	}
 
 
@@ -73,7 +81,7 @@ public class Banco {
 		boolean excluiu = true;
 
 		manager.getTransaction().begin();
-		Produto p = manager.find(Produto.class, Integer.valueOf(codigo));
+		Produto p = consultarProduto(codigo);
 		
 		if (p != null) 
 			manager.remove(p);
@@ -101,7 +109,13 @@ public class Banco {
 	 */
 	public Produto consultarProduto(int codigo) {
 		
-		Produto p = manager.find(Produto.class, Integer.valueOf(codigo));	
+		Produto p = null;
+		
+		try {
+			p = manager.find(Produto.class, Integer.valueOf(codigo));
+		} catch (NoResultException e) {
+			// nada a por aqui
+		}	
 
 		return p;
 	}
@@ -114,13 +128,6 @@ public class Banco {
 		manager.getTransaction().begin();
 		manager.merge(produto);
 		manager.getTransaction().commit();
-		
-	}
-
-	/**
-	 * Salva um item no BD
-	 */
-	public void salvarItem(Item item) {
 		
 	}
 }
