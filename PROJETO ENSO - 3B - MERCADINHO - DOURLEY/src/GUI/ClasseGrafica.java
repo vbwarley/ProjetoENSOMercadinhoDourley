@@ -41,22 +41,25 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	private JButton botaoSairProdutos;
 	private JButton botaoVerificarExistencia;
 	private JButton incluirProduto;
-	private JButton botaoVoltarInclusaoProdutos;
 	private JButton adicionaAoCarrinho;
 	private JButton finalizarVenda;
 	private JButton botaoConsultarVenda;
-	private JTextField codigoProduto;
+	private JButton alterarProduto;
+	private JButton botaoVoltarInclusaoProdutos;
+	private JButton botaoVoltarAlterarProduto;
 	private JTextField quantidadeProdutoText;
 	private JTextField dataVendasText;
 	private JTextField nomeProdutoText;
 	private JTextField descricaoProdutoText;
 	private JTextField precoProdutoText;
 	private JTextField unidadeProdutoText;
+	private JTextField codigoProdutoText;
 	
 	//Paineis
 	private JPanel painel;
 	private JPanel painelManterProdutos;
 	private JPanel painelIncluirProduto;
+	private JPanel painelAlterarProduto;
 	
 	public ClasseGrafica () {
 		
@@ -224,8 +227,8 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		
 		gridVendas.gridx = 1;
 		gridVendas.gridy = 0;
-		codigoProduto = new JTextField(15);
-		painelCadastrarVenda.add(codigoProduto, gridVendas);
+		codigoProdutoText = new JTextField(15);
+		painelCadastrarVenda.add(codigoProdutoText, gridVendas);
 		
 		gridVendas.gridx = 2;
 		gridVendas.gridy = 0;
@@ -261,53 +264,83 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	
 	private void painelAlterarProduto() {
 		
-		JPanel painelAlterarProduto = new JPanel();
-		painelAlterarProduto.setBorder(BorderFactory.createTitledBorder("Manter produtos"));
+		painelAlterarProduto = new JPanel();
+		painelAlterarProduto.setBorder(BorderFactory.createTitledBorder("Alterar produto"));
 		painelAlterarProduto.setLayout(new GridBagLayout());
 		painelAlterarProduto.setSize(new Dimension(500, 500));
 		
 		this.add(BorderLayout.BEFORE_FIRST_LINE, painelAlterarProduto);
 		
-		GridBagConstraints gridVendas = new GridBagConstraints();
-		gridVendas.insets = new Insets(4, 4, 4, 4);
+		GridBagConstraints gridProdutos = new GridBagConstraints();
+		gridProdutos.insets = new Insets(4, 4, 4, 4);
 		
-		gridVendas.gridx = 0;
-		gridVendas.gridy = 0;
-		JLabel codigoProdutoLabel = new JLabel("Código do produto");
-		painelAlterarProduto.add(codigoProdutoLabel, gridVendas);
+		gridProdutos.gridx = 0;
+		gridProdutos.gridy = 0;
+		JLabel codigoProdutoLabel = new JLabel("Codigo do produto");
+		painelAlterarProduto.add(codigoProdutoLabel, gridProdutos);
 		
-		gridVendas.gridx = 1;
-		gridVendas.gridy = 0;
-		codigoProduto = new JTextField(15);
-		painelAlterarProduto.add(codigoProduto, gridVendas);
+		gridProdutos.gridx = 1;
+		gridProdutos.gridy = 0;
+		codigoProdutoText = new JTextField(15);
+		painelAlterarProduto.add(codigoProdutoText, gridProdutos);
 		
-		gridVendas.gridx = 2;
-		gridVendas.gridy = 0;
+		gridProdutos.gridx = 2;
+		gridProdutos.gridy = 0;
 		botaoVerificarExistencia = new JButton("Verificar");
 		botaoVerificarExistencia.addActionListener(this);
-		painelAlterarProduto.add(botaoVerificarExistencia, gridVendas);
-				
-		gridVendas.gridx = 0;
-		gridVendas.gridy = 2;
-		JLabel quantidadeProdutoLabel = new JLabel("Quantidade");
-		painelAlterarProduto.add(quantidadeProdutoLabel, gridVendas);
-				
-		gridVendas.gridx = 1;
-		gridVendas.gridy = 2;
-		quantidadeProdutoText = new JTextField(8);
-		painelAlterarProduto.add(quantidadeProdutoText, gridVendas);
+		painelAlterarProduto.add(botaoVerificarExistencia, gridProdutos);
 		
-		gridVendas.gridx = 2;
-		gridVendas.gridy = 2;
-		adicionaAoCarrinho = new JButton("Adicionar");
-		adicionaAoCarrinho.addActionListener(this);
-		painelAlterarProduto.add(adicionaAoCarrinho, gridVendas);
+		gridProdutos.gridx = 0;
+		gridProdutos.gridy = 1;
+		JLabel nomeProdutoLabel = new JLabel("Nome do produto");
+		painelAlterarProduto.add(nomeProdutoLabel, gridProdutos);
 		
-		gridVendas.gridx = 1;
-		gridVendas.gridy = 4;
-		finalizarVenda = new JButton("finalizar venda");
-		finalizarVenda.addActionListener(this);
-		painelAlterarProduto.add(finalizarVenda, gridVendas);
+		gridProdutos.gridx = 1;
+		gridProdutos.gridy = 1;
+		nomeProdutoText = new JTextField(15);
+		painelAlterarProduto.add(nomeProdutoText, gridProdutos);
+				
+		gridProdutos.gridx = 0;
+		gridProdutos.gridy = 2;
+		JLabel descricaoProdutoLabel = new JLabel("Descrição");
+		painelAlterarProduto.add(descricaoProdutoLabel, gridProdutos);
+				
+		gridProdutos.gridx = 1;
+		gridProdutos.gridy = 2;
+		descricaoProdutoText = new JTextField(15);
+		painelAlterarProduto.add(descricaoProdutoText, gridProdutos);
+		
+		gridProdutos.gridx = 0;
+		gridProdutos.gridy = 3;
+		JLabel precoProdutoLabel = new JLabel("Preço");
+		painelAlterarProduto.add(precoProdutoLabel, gridProdutos);
+				
+		gridProdutos.gridx = 1;
+		gridProdutos.gridy = 3;
+		precoProdutoText = new JTextField(6);
+		painelAlterarProduto.add(precoProdutoText, gridProdutos);
+		
+		gridProdutos.gridx = 0;
+		gridProdutos.gridy = 4;
+		JLabel unidadeProdutoLabel = new JLabel("Unidade");
+		painelAlterarProduto.add(unidadeProdutoLabel, gridProdutos);
+				
+		gridProdutos.gridx = 1;
+		gridProdutos.gridy = 4;
+		unidadeProdutoText = new JTextField(8);
+		painelAlterarProduto.add(unidadeProdutoText, gridProdutos);
+		
+		gridProdutos.gridx = 1;
+		gridProdutos.gridy = 5;
+		alterarProduto = new JButton("Alterar no banco de dados");
+		alterarProduto.addActionListener(this);
+		painelAlterarProduto.add(alterarProduto, gridProdutos);
+		
+		gridProdutos.gridx = 1;
+		gridProdutos.gridy = 6;
+		botaoVoltarAlterarProduto = new JButton("Voltar...");
+		botaoVoltarAlterarProduto.addActionListener(this);
+		painelAlterarProduto.add(botaoVoltarAlterarProduto, gridProdutos);
 		
 		painelAlterarProduto.setVisible(true);
 		
@@ -367,7 +400,7 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		
 		gridProdutos.gridx = 1;
 		gridProdutos.gridy = 4;
-		incluirProduto = new JButton("Incluir");
+		incluirProduto = new JButton("Alterar");
 		incluirProduto.addActionListener(this);
 		painelIncluirProduto.add(incluirProduto, gridProdutos);
 		
@@ -434,6 +467,13 @@ private void painelConsultarVenda() {
 			painelIncluirProduto();
 		} else if (e.getSource() == botaoVoltarInclusaoProdutos){
 			painelIncluirProduto.setVisible(false);
+			painelManterProdutos.setVisible(true);
+		} else if (e.getSource() == botaoOkAlterar){
+			painel.setVisible(false);
+			painelManterProdutos.setVisible(false);
+			painelAlterarProduto();
+		} else if (e.getSource() == botaoVoltarAlterarProduto){
+			painelAlterarProduto.setVisible(false);
 			painelManterProdutos.setVisible(true);
 		}
 		
