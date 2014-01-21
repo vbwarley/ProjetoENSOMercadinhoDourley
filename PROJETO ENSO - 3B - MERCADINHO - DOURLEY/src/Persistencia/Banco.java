@@ -109,16 +109,10 @@ public class Banco {
 	/**
 	 * Alterar produto do banco de dados
 	 */
-	public void alterarProduto(int codigo, String nome, String descricao, float preco, String unidade) {
+	public void alterarProduto(Produto produto) {
 
-		Produto p = manager.find(Produto.class, Integer.valueOf(codigo));
-		p.setNomeProduto(nome);
-		p.setDescricaoProduto(descricao);
-		p.setPrecoProduto(preco);
-		p.setUnidadeProduto(unidade);
-		
 		manager.getTransaction().begin();
-		manager.merge(p);
+		manager.merge(produto);
 		manager.getTransaction().commit();
 		
 	}

@@ -53,8 +53,8 @@ public class SistemaFinal {
 	 * @author barbosa
 	 * @param codigo Código do produto a ser alterado.
 	 **/
-	public static void alterarProduto(int codigo) {
-		Facade.getInstance().alterarProduto(codigo);
+	public static void alterarProduto(int codigo, String nome, String descricao,float preco,String  unidade) {
+		Facade.getInstance().alterarProduto(codigo, nome, descricao, preco, unidade);
 	}
 
 	/**

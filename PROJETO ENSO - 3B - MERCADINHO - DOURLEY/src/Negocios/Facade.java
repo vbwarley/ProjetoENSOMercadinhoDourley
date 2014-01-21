@@ -34,30 +34,19 @@ public class Facade {
 	 * Recebe o codigo do produto para alterar seus atributos
 	 * Retorna o boolean confirmando se foi ou não alterado
 	 */
-	public boolean alterarProduto(int codigoProduto) {
+	public void alterarProduto(int codigoProduto, String nome, String descricao, float preco, String unidade) {
 
-		Produto produtoRetornado = Catalogo.alterarProduto(codigoProduto);
-		boolean retornou = false;
-
-		if (produtoRetornado != null)
-			retornou = true;
-
-		return retornou;
+		Catalogo.alterarProduto(codigoProduto, nome, descricao, preco, unidade);
+		
 	}
 
 	/**
 	 *Recebe um código de produto para consulta-lo no banco de dados
 	 *Retorna uma string com os dados do produto
 	 */
-	public String consultarProduto(int codigoProduto) {
+	public void consultarProduto(int codigoProduto) {
 		Produto produto = Catalogo.consultarProduto(codigoProduto);
-		String dadosProduto = "";
 
-		if (produto != null) {
-			dadosProduto = produto.toString();
-		}
-
-		return dadosProduto;
 	}
 
 	/**
