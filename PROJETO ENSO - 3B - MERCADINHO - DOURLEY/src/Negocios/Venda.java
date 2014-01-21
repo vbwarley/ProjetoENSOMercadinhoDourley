@@ -183,18 +183,6 @@ public class Venda {
 	}
 
 	/**
-	 * Salvar os itens no Banco de dados chamando a persistencia e associando o
-	 * código da venda em questão aos itens.
-	 */
-	public void salvarItem() {
-//		for (Item i : itens) {
-//			i.setCodigoVenda(this.codIdentificacao);
-//			i.setCusto();
-//			Banco.getInstance().salvarItem(i);
-//		}
-	}
-
-	/**
 	 * Consulta no banco de dados, atravez da persistência, os itens
 	 * relacionado ao codigo da venda passado como parâmetro.
 	 */
