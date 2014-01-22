@@ -28,7 +28,7 @@ import Persistencia.Banco;
 
 @Entity
 @NamedQuery(name="Venda.findByDate",
-	query="SELECT v FROM Venda v WHERE data = :data")
+	query="SELECT v FROM Venda v WHERE v.data = :data")
 public class Venda {
 
 	@Id
@@ -136,7 +136,7 @@ public class Venda {
 	 */
 	public static String consultar(Date data) {
 		Collection<Venda> vendasRetornadas = Banco.getInstance()
-				.consultarVenda(data.toString());
+				.consultarVenda(data);
 
 		String vendas = "Venda\tData\tTotal\tPagamento\tTroco\n\n";
 

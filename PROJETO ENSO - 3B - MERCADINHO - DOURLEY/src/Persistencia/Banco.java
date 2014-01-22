@@ -2,6 +2,7 @@
 
 package Persistencia;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -31,9 +32,9 @@ public class Banco {
 	 * Consulta de vendas pela data.
 	 * Retorna um ArrayList de todas as vendas realizadas na data digitada.
 	 **/
-	public List<Venda> consultarVenda(String data){
+	public List<Venda> consultarVenda(Date data){
 		
-		Query query = manager.createQuery("Venda.findByDate");
+		Query query = manager.createNamedQuery("Venda.findByDate");
 		query.setParameter("data", data);
 		
 		List<Venda> vendas = null;
