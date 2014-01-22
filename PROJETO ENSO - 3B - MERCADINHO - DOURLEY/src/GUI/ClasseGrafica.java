@@ -631,9 +631,28 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 				
 				SistemaFinal.incluirProduto(nome, descricao, preco, unidade);	
 			}
-		}	
-		
-	}
+			
+		} else if (e.getSource() == alterarProduto){
+			
+			if (nomeProdutoText.getText().isEmpty() || descricaoProdutoText.getText().isEmpty() || unidadeProdutoText.getText().isEmpty() || precoProdutoText.getText().isEmpty()){
+				
+				JOptionPane.showMessageDialog(null, "Algum campo está vazio, ou o campo preço tem zero \n");
+				
+				} else {
+					String codigoString = codigoProdutoText.getText();
+					int codigo = Integer.parseInt(codigoString);
+					String nome = nomeProdutoText.getText();
+					String descricao = descricaoProdutoText.getText();
+					String precoString = precoProdutoText.getText();
+					float preco = Float.parseFloat(precoString);
+					String unidade = unidadeProdutoText.getText();
+					
+					SistemaFinal.alterarProduto(codigo, nome, descricao, preco, unidade);
+					
+					JOptionPane.showMessageDialog(null, "Novos valores: "+"\nNome: "+nome+"\nDescrição: "+descricao+"\nPreço: "+preco+"\nUnidade: "+unidade);
+				}
+			}
+		}
 
 	
 }
