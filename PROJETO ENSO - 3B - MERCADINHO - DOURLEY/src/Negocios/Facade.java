@@ -25,8 +25,7 @@ public class Facade {
 	public void cadastrarProduto(String nomeProduto, String descricaoProduto,
 			float precoProduto, String unidadeProduto) {
 
-		Produto produto = new Produto(nomeProduto, descricaoProduto,
-				precoProduto, unidadeProduto);
+		Produto produto = new Produto(nomeProduto, descricaoProduto, precoProduto, unidadeProduto);
 		Catalogo.cadastrarProduto(produto);
 	}
 

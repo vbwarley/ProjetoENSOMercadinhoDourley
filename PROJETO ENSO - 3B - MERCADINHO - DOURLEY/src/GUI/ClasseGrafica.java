@@ -29,7 +29,6 @@ import javax.swing.border.EmptyBorder;
 
 public class ClasseGrafica extends JFrame implements ActionListener{
 
-	
 	//Botoes e campos de textos
 	private JButton botaoOkManterProdutos;	
 	private JButton botaoOkCadastrarVenda;
@@ -53,6 +52,7 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	private JButton botaoExcluirProduto;
 	private JButton botaoVoltarExcluirProduto;
 	private JButton botaoVoltarConsultarVenda;
+	private JButton botaoVoltarCadastrarVenda;
 	private JTextField quantidadeProdutoText;
 	private JTextField dataVendasText;
 	private JTextField nomeProdutoText;
@@ -69,6 +69,7 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	private JPanel painelConsultarProduto;
 	private JPanel painelExcluirProduto;
 	private JPanel painelConsultarVenda;
+	private JPanel painelCadastrarVenda;
 	
 	public ClasseGrafica () {
 		
@@ -219,8 +220,8 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	
 	private void painelCadastrarVenda() {
 		
-		JPanel painelCadastrarVenda = new JPanel();
-		painelCadastrarVenda.setBorder(BorderFactory.createTitledBorder("Manter produtos"));
+		painelCadastrarVenda = new JPanel();
+		painelCadastrarVenda.setBorder(BorderFactory.createTitledBorder("Cadastrar venda"));
 		painelCadastrarVenda.setLayout(new GridBagLayout());
 		painelCadastrarVenda.setSize(new Dimension(500, 500));
 		
@@ -266,6 +267,12 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		finalizarVenda = new JButton("finalizar venda");
 		finalizarVenda.addActionListener(this);
 		painelCadastrarVenda.add(finalizarVenda, gridVendas);
+		
+		gridVendas.gridx = 2;
+		gridVendas.gridy = 5;
+		botaoVoltarCadastrarVenda = new JButton("Voltar...");
+		botaoVoltarCadastrarVenda.addActionListener(this);
+		painelCadastrarVenda.add(botaoVoltarCadastrarVenda, gridVendas);
 		
 		painelCadastrarVenda.setVisible(true);
 		
@@ -499,7 +506,7 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		
 		gridProdutos.gridx = 1;
 		gridProdutos.gridy = 4;
-		incluirProduto = new JButton("Alterar");
+		incluirProduto = new JButton("Incluir");
 		incluirProduto.addActionListener(this);
 		painelIncluirProduto.add(incluirProduto, gridProdutos);
 		
@@ -598,6 +605,9 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		} else if (e.getSource() == botaoVoltarConsultarVenda){
 			painelConsultarVenda.setVisible(false);
 			painel.setVisible(true);
+		} else if (e.getSource() == botaoVoltarCadastrarVenda){
+			painelCadastrarVenda.setVisible(false);
+			painel.setVisible(true);
 		} else if (e.getSource() == botaoVerificarExistencia){
 			
 			String codString = codigoProdutoText.getText();
@@ -605,7 +615,22 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 			int codigo = Integer.parseInt(codString);
 			
 			SistemaFinal.verificarProduto(codigo);
+		} else if (e.getSource() == incluirProduto){
+			
+			String nome = nomeProdutoText.getText();
+			String descricao = descricaoProdutoText.getText();
+			String precoString = precoProdutoText.getText();
+			float preco = Float.parseFloat(precoString);
+			String unidade = unidadeProdutoText.getText();
+			
+			if (nome.isEmpty() || descricao.isEmpty() || unidade.isEmpty() || precoProdutoText.getText().isEmpty() || preco == 0){
+				JOptionPane.showMessageDialog(null, "Algum campo está vazio, ou o campo preço tem zero \n");
+			} else {
+				SistemaFinal.incluirProduto(nome, descricao, preco, unidade);	
+			}
 		}
+		
+		
 		
 	}
 
