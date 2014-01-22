@@ -118,8 +118,10 @@ public class SistemaFinal {
 	 * @param codigo Código do produto a ser excluído.
 	 **/
 	public static void excluirProduto(int codigo) {
-		Facade.getInstance().excluirProduto(codigo);
-		JOptionPane.showMessageDialog(null, "Produto excluído com sucesso.");
+		if (!Facade.getInstance().excluirProduto(codigo))
+			JOptionPane.showMessageDialog(null, "Algo de errado aconteceu. Ou produto pode estara associado a alguma venda, ou ele não existe!");
+		else
+			JOptionPane.showMessageDialog(null, "Produto excluído com sucesso.");
 	}
 
 	/**

@@ -88,8 +88,8 @@ public class Facade {
 	/**
 	 *Recebe um código referente a um produto para excluí-lo do Banco de dados 
 	 */
-	public void excluirProduto(int codigoProduto) {
-		Catalogo.excluirProduto(codigoProduto);
+	public boolean excluirProduto(int codigoProduto) {
+		return Catalogo.excluirProduto(codigoProduto);
 	}
 
 	/**

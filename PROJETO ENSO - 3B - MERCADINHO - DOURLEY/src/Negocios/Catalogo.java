@@ -1,5 +1,7 @@
 package Negocios;
 
+import javax.swing.JOptionPane;
+
 import Persistencia.Banco;
 
 public class Catalogo {
@@ -42,8 +44,12 @@ public class Catalogo {
 	/**
 	 * Recebe o código do produto para excluí-lo do Banco de dados
 	 */
-	public static void excluirProduto(int codigoProduto) {
+	public static boolean excluirProduto(int codigoProduto) {
 		// atenção para caso de produto não cadastrado
-		Banco.getInstance().excluirProduto(consultarProduto(codigoProduto).getCodProduto());		
+		if (consultarProduto(codigoProduto) == null)
+			return false;
+		else					
+			return Banco.getInstance().excluirProduto(consultarProduto(codigoProduto).getCodProduto());
+			
 	}
 }

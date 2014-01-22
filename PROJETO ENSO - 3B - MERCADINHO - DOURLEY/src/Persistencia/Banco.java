@@ -10,7 +10,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.RollbackException;
 
+import Negocios.Item;
 import Negocios.Venda;
 import Negocios.Produto;
 
@@ -72,24 +74,38 @@ public class Banco {
 		manager.persist(venda);
 		manager.getTransaction().commit();
 	}
-
+	
+	private boolean verAssociacao(int codigo) {
+		// aqui está dando erro
+		Query query = manager.createQuery("SELECT p FROM Venda v, Produto p, ItemVenda i "
+				+ "WHERE v.codVenda = i.codVenda AND p.codProduto = i.codProduto AND p.codProduto = " + codigo);
+		List<Produto> i = query.getResultList();
+			
+		return i.isEmpty();
+	}
 
 	/**
 	 *Excluir um produto do Banco de dados 
 	 **/
 	public boolean excluirProduto(int codigo) {
 
-		boolean excluiu = true;
+		boolean excluiu = false;
 
-		manager.getTransaction().begin();
 		Produto p = consultarProduto(codigo);
+
+		if (p != null)
+			try {
+				if (verAssociacao(codigo)) {
+					manager.getTransaction().begin();
+					manager.remove(p);
+					manager.getTransaction().commit();
+					excluiu = true;
+				}
+			} catch (RollbackException e) {
+				// o erro pode ser o produto estar associado a alguma venda
+				
+			}
 		
-		if (p != null) 
-			manager.remove(p);
-		else
-			excluiu = false;
-		
-		manager.getTransaction().commit();
 		
 		return excluiu;
 	}
