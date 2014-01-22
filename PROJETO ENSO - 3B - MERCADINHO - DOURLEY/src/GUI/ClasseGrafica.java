@@ -598,6 +598,13 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		} else if (e.getSource() == botaoVoltarConsultarVenda){
 			painelConsultarVenda.setVisible(false);
 			painel.setVisible(true);
+		} else if (e.getSource() == botaoVerificarExistencia){
+			
+			String codString = codigoProdutoText.getText();
+			
+			int codigo = Integer.parseInt(codString);
+			
+			SistemaFinal.verificarProduto(codigo);
 		}
 		
 	}

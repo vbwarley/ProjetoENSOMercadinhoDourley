@@ -27,6 +27,16 @@ public class SistemaFinal {
 		Facade.getInstance().cadastrarVenda();
 
 	}
+	
+	public static void verificarProduto(int codigo){
+
+		if (Facade.verificarProduto(codigo) == null){
+			JOptionPane.showMessageDialog(null, "O código digitado é inválido, tente novamente \n"+"Caso continue a operação não poderá ser validada");
+		} else {
+			JOptionPane.showMessageDialog(null, "O código digitado é válido, clique em OK para prosseguir... \n");
+		}
+		
+	} 
 
 	/**
 	 * Consulta de vendas a partir da data.

@@ -49,6 +49,12 @@ public class Facade {
 
 		return produto.toString();
 	}
+	
+	public static Produto verificarProduto(int codigo){
+		
+		return Catalogo.consultarProduto(codigo);
+		
+	}
 
 	/**
 	 *Recebe um código referente a um produto para excluí-lo do Banco de dados 
