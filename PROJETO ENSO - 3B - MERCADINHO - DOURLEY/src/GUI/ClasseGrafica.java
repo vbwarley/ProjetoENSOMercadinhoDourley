@@ -36,7 +36,7 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	private JButton botaoOkSair;
 	private JButton botaoOkIncluir;
 	private JButton botaoOkAlterar;
-	private JButton botaoOkConsultar;
+	private JButton botaoOkConsultarProduto;
 	private JButton botaoOkExcluir;
 	private JButton botaoSairProdutos;
 	private JButton botaoVerificarExistencia;
@@ -54,6 +54,7 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	private JTextField precoProdutoText;
 	private JTextField unidadeProdutoText;
 	private JTextField codigoProdutoText;
+	private JButton botaoConsultarProduto;
 	
 	//Paineis
 	private JPanel painel;
@@ -178,9 +179,9 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		
 		gridVendas.gridx = 1;
 		gridVendas.gridy = 2;
-		botaoOkConsultar = new JButton("OK");
-		botaoOkConsultar.addActionListener(this);
-		painelManterProdutos.add(botaoOkConsultar, gridVendas);
+		botaoOkConsultarProduto = new JButton("OK");
+		botaoOkConsultarProduto.addActionListener(this);
+		painelManterProdutos.add(botaoOkConsultarProduto, gridVendas);
 				
 		gridVendas.gridx = 0;
 		gridVendas.gridy = 3;
@@ -375,57 +376,12 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		botaoVerificarExistencia.addActionListener(this);
 		painelConsultarProduto.add(botaoVerificarExistencia, gridConsultarProduto);
 		
-		gridConsultarProduto.gridx = 0;
-		gridConsultarProduto.gridy = 1;
-		JLabel nomeProdutoLabel = new JLabel("Nome do produto");
-		painelConsultarProduto.add(nomeProdutoLabel, gridConsultarProduto);
-		
 		gridConsultarProduto.gridx = 1;
 		gridConsultarProduto.gridy = 1;
-		nomeProdutoText = new JTextField(15);
-		painelConsultarProduto.add(nomeProdutoText, gridConsultarProduto);
-				
-		gridConsultarProduto.gridx = 0;
-		gridConsultarProduto.gridy = 2;
-		JLabel descricaoProdutoLabel = new JLabel("Descrição");
-		painelConsultarProduto.add(descricaoProdutoLabel, gridConsultarProduto);
-				
-		gridConsultarProduto.gridx = 1;
-		gridConsultarProduto.gridy = 2;
-		descricaoProdutoText = new JTextField(15);
-		painelConsultarProduto.add(descricaoProdutoText, gridConsultarProduto);
+		botaoConsultarProduto = new JButton("Consultar");
+		botaoConsultarProduto.addActionListener(this);
+		painelConsultarProduto.add(botaoConsultarProduto, gridConsultarProduto);
 		
-		gridConsultarProduto.gridx = 0;
-		gridConsultarProduto.gridy = 3;
-		JLabel precoProdutoLabel = new JLabel("Preço");
-		painelConsultarProduto.add(precoProdutoLabel, gridConsultarProduto);
-				
-		gridConsultarProduto.gridx = 1;
-		gridConsultarProduto.gridy = 3;
-		precoProdutoText = new JTextField(6);
-		painelConsultarProduto.add(precoProdutoText, gridConsultarProduto);
-		
-		gridConsultarProduto.gridx = 0;
-		gridConsultarProduto.gridy = 4;
-		JLabel unidadeProdutoLabel = new JLabel("Unidade");
-		painelConsultarProduto.add(unidadeProdutoLabel, gridConsultarProduto);
-				
-		gridConsultarProduto.gridx = 1;
-		gridConsultarProduto.gridy = 4;
-		unidadeProdutoText = new JTextField(8);
-		painelConsultarProduto.add(unidadeProdutoText, gridConsultarProduto);
-		
-		gridConsultarProduto.gridx = 1;
-		gridConsultarProduto.gridy = 5;
-		alterarProduto = new JButton("Alterar no banco de dados");
-		alterarProduto.addActionListener(this);
-		painelConsultarProduto.add(alterarProduto, gridConsultarProduto);
-		
-		gridConsultarProduto.gridx = 1;
-		gridConsultarProduto.gridy = 6;
-		botaoVoltarAlterarProduto = new JButton("Voltar...");
-		botaoVoltarAlterarProduto.addActionListener(this);
-		painelConsultarProduto.add(botaoVoltarAlterarProduto, gridConsultarProduto);
 		
 		painelConsultarProduto.setVisible(true);
 		
@@ -561,6 +517,10 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		} else if (e.getSource() == botaoVoltarAlterarProduto){
 			painelAlterarProduto.setVisible(false);
 			painelManterProdutos.setVisible(true);
+		} else if (e.getSource() == botaoOkConsultarProduto){
+			painel.setVisible(false);
+			painelManterProdutos.setVisible(false);
+			painelConsultarProduto();
 		}
 		
 	}

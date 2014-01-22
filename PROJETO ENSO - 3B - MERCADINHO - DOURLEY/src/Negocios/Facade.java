@@ -44,9 +44,10 @@ public class Facade {
 	 *Recebe um código de produto para consulta-lo no banco de dados
 	 *Retorna uma string com os dados do produto
 	 */
-	public void consultarProduto(int codigoProduto) {
+	public String consultarProduto(int codigoProduto) {
 		Produto produto = Catalogo.consultarProduto(codigoProduto);
 
+		return produto.toString();
 	}
 
 	/**

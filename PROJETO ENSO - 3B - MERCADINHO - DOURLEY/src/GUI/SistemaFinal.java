@@ -3,6 +3,8 @@ package GUI;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import Negocios.Facade;
 
 public class SistemaFinal {
@@ -63,7 +65,7 @@ public class SistemaFinal {
 	 * @param codigo Código do produto a ser consultado.
 	 **/
 	public static void consultarProduto(int codigo) {
-		Facade.getInstance().consultarProduto(codigo);
+		JOptionPane.showMessageDialog(null, Facade.getInstance().consultarProduto(codigo));
 	}
 
 	/**
