@@ -36,7 +36,7 @@ public class Venda {
 	@Column(nullable=false)
 	private int codVenda = 0;
 	private float pagamentoRecebido = 0;
-	private float troco;
+	private float troco = 0;
 	private float total = 0;
 	
 	@Temporal(TemporalType.DATE)
@@ -169,20 +169,7 @@ public class Venda {
 			if (itens.isEmpty()) {
 				itens.add(item);
 				itens.get(itens.lastIndexOf(item)).setVenda(this); // PORRA, ESSA LINHA!! LEMBRE-SE SEMPRE DESSA LINHA!
-			} else {
-				for (Item i : itens) {
-					if (i.getProduto().equals(p)) {
-						i.setQtdProduto(quantidade);
-						break;
-					} else if (itens.get(itens.size() - 1) == i) {
-						Item item2 = new Item(p, quantidade);
-						itens.add(item2);
-						itens.get(itens.lastIndexOf(item2)).setVenda(this); // PORRA, ESSA LINHA!! LEMBRE-SE SEMPRE DESSA LINHA!
-
-						break;
-					}	
-				}
-			}
+			} 
 		}
 	}
 
@@ -210,12 +197,14 @@ public class Venda {
 	public float getTroco() {
 
 		if (this.pagamentoRecebido >= total) {
-			this.troco = this.pagamentoRecebido - total;
-		} else if (this.pagamentoRecebido < total) {
+			this.troco = this.pagamentoRecebido - this.total;
+		} else if (this.pagamentoRecebido < this.total) {
 			this.troco = 0;
 		}
-
-		return this.troco;
+		
+		this.setTroco(troco);
+		
+		return troco;
 	}
 	
 	public List<Item> getItens() {

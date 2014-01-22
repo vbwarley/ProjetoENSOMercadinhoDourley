@@ -16,16 +16,29 @@ public class SistemaFinal {
 	 * @param quantidades Lista de quantidades de produtos (relacionadas a cada código).
 	 * @param pagamento Pagamento recebido pela venda feita.
 	 **/
-	public static void cadastrarVenda(ArrayList<Integer> codigos, ArrayList<Integer> quantidades, int pagamento) {
+	public static void cadastrarVenda(ArrayList<Integer> codigos, ArrayList<Integer> quantidades, float pagamento, float total, float troco) {
 		Facade.getInstance().novaVenda();
 		
 		for (int i = 0; i < codigos.size(); i++) 
 			Facade.getInstance().inserirItemVenda(codigos.get(i), quantidades.get(i));
 		
 		Facade.getInstance().setPagamentoVenda(pagamento);
-
+		Facade.getInstance().setTotalVenda(total);
+		Facade.getInstance().setTroco(troco);
 		Facade.getInstance().cadastrarVenda();
+		
+		JOptionPane.showMessageDialog(null, "Venda finalizada com sucesso! \n" + "Troco: "+troco);
 
+	}
+	
+	public static float getTrocoVenda(){
+		return Facade.getInstance().getTroco();
+	}
+	
+	public static void detalharVenda(int codigo){
+		
+		JOptionPane.showMessageDialog(null, Facade.getInstance().detalharVenda(codigo));
+		
 	}
 	
 	public static float calcularCusto(int codigo, int quantidade){
@@ -51,9 +64,15 @@ public class SistemaFinal {
 	 * @author barbosa
 	 * @param data Data a ser buscada como data da vendas requeridas
 	 **/
-	public static void consultarVenda(String data) {
+	public static int consultarVenda(String data) {
 		Date dataRetornada = Date.valueOf(data);
-		Facade.getInstance().consultarVenda(dataRetornada);
+		
+		String codigoString = JOptionPane.showInputDialog("Digite o código referente a venda que deseja detalhar \n"+ Facade.getInstance().consultarVenda(dataRetornada)).toString();
+	
+		int codigo = Integer.parseInt(codigoString);
+		
+		return codigo;
+		
 	}
 
 	/**

@@ -34,7 +34,7 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	private JButton incluirProduto;
 	private JButton adicionaAoCarrinho;
 	private JButton finalizarVenda;
-	private JButton botaoConsultarVenda;
+	private JButton consultarVenda;
 	private JButton alterarProduto;
 	private JButton botaoVoltarInclusaoProdutos;
 	private JButton botaoVoltarAlterarProduto;
@@ -51,6 +51,8 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	private JTextField precoProdutoText;
 	private JTextField unidadeProdutoText;
 	private JTextField codigoProdutoText;
+	private JTextField custoTotalTexto;
+	private JLabel trocoLabel;
 
 	//Paineis
 	private JPanel painel;
@@ -62,18 +64,18 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	private JPanel painelConsultarVenda;
 	private JPanel painelCadastrarVenda;
 	private JTextField pagamentoText;
-	
+
 	//ArrayList para cadastrar venda
 	private ArrayList<Integer> codigos = new ArrayList<Integer>();
 	private ArrayList<Integer> quantidades = new ArrayList<Integer>();
 	private float custoTotalVenda = 0; 
-	
+
 	//Configuração do grid em cadastrarVendas
 	private int x1 = 0; //primeira coluna
 	private int x2 = 1; //segunda coluna
 	private int x3 = 2; //Terceira coluna
 	private int y = 8; //Linha inicial
-	
+
 	public ClasseGrafica () {
 
 		super("Mercadinho do Zé");
@@ -274,6 +276,16 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		gridVendas.gridy = 4;
 		pagamentoText = new JTextField(6);
 		painelCadastrarVenda.add(pagamentoText, gridVendas);
+
+		gridVendas.gridx = 2;
+		gridVendas.gridy = 4;
+		JLabel trocoTexto = new JLabel("Troco: ");
+		painelCadastrarVenda.add(trocoTexto, gridVendas);
+
+		gridVendas.gridx = 3;
+		gridVendas.gridy = 4;
+		trocoLabel = new JLabel();
+		painelCadastrarVenda.add(trocoLabel, gridVendas);
 
 		gridVendas.gridx = 1;
 		gridVendas.gridy = 5;
@@ -558,9 +570,9 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 
 		gridConsultaVendas.gridx = 2;
 		gridConsultaVendas.gridy = 0;
-		botaoConsultarVenda = new JButton("Consultar");
-		botaoConsultarVenda.addActionListener(this);
-		painelConsultarVenda.add(botaoConsultarVenda, gridConsultaVendas);
+		consultarVenda = new JButton("Consultar");
+		consultarVenda.addActionListener(this);
+		painelConsultarVenda.add(consultarVenda, gridConsultaVendas);
 
 		gridConsultaVendas.gridx = 1;
 		gridConsultaVendas.gridy = 1;
@@ -665,83 +677,114 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Novos valores: "+"\nNome: "+nome+"\nDescrição: "+descricao+"\nPreço: "+preco+"\nUnidade: "+unidade);
 			}
 		} else if (e.getSource() == consultarProduto){
-			
+
 			String codigoString = codigoProdutoText.getText();
 			int codigo = Integer.parseInt(codigoString);
-			
+
 			SistemaFinal.consultarProduto(codigo);
-			
+
 		} else if (e.getSource() == excluirProduto){
-			
+
 			String codigoString = codigoProdutoText.getText();
 			int codigo = Integer.parseInt(codigoString);
-			
+
 			SistemaFinal.excluirProduto(codigo);
 		} else if (e.getSource() == adicionaAoCarrinho){
-			
+
 			GridBagConstraints gridCadastrarVenda = new GridBagConstraints();
 			gridCadastrarVenda.insets = new Insets(2, 2, 2, 2);
-			
+
 			gridCadastrarVenda.gridx = x1;
 			gridCadastrarVenda.gridy = 7;
-			
+
 			//Modifica y que é referente a proxima linha vazia
-			
+
 			JLabel codigoProdutoLabel = new JLabel("Código");
 			painelCadastrarVenda.add(codigoProdutoLabel, gridCadastrarVenda);
-			
+
 			gridCadastrarVenda.gridx = x2;
 			JLabel quantidadeTextoLabel = new JLabel("Quantidade");
 			painelCadastrarVenda.add(quantidadeTextoLabel, gridCadastrarVenda);
-			
+
 			gridCadastrarVenda.gridx = x3;
 			JLabel custoTextoLabel = new JLabel("Custo");
 			painelCadastrarVenda.add(custoTextoLabel, gridCadastrarVenda);
-			
+
 			String codigoString = codigoProdutoText.getText();
 			int codigo = Integer.parseInt(codigoString);
 			codigos.add(codigo);
-			
+
 			String quantidadeString = quantidadeProdutoText.getText();
 			int quantidade = Integer.parseInt(quantidadeString);
 			quantidades.add(quantidade);
-			
+
 			float custo = SistemaFinal.calcularCusto(codigo, quantidade);
 			custoTotalVenda = custoTotalVenda + custo;
-			
+
 			String custoString = String.valueOf(custo);
 			String custoTotalString = String.valueOf(custoTotalVenda);
-			
+
 			gridCadastrarVenda.gridx = x1;
 			gridCadastrarVenda.gridy = y;
-			
+
 			JLabel codigoProdutoTexto = new JLabel(codigoString);
 			painelCadastrarVenda.add(codigoProdutoTexto, gridCadastrarVenda);
-			
+
 			gridCadastrarVenda.gridx = x2;
 			JLabel quantidadeTexto = new JLabel(quantidadeString);
 			painelCadastrarVenda.add(quantidadeTexto, gridCadastrarVenda);
-			
+
 			gridCadastrarVenda.gridx = x3;
 			JLabel custoTexto = new JLabel(custoString);
 			painelCadastrarVenda.add(custoTexto, gridCadastrarVenda);
 
 			gridCadastrarVenda.gridx = x3+1;
 			gridCadastrarVenda.gridy = 7;
-			
+
 			JLabel custoTotalLabel = new JLabel("Total: ");
 			painelCadastrarVenda.add(custoTotalLabel, gridCadastrarVenda);
-			
+
 			gridCadastrarVenda.gridy = 8;
-			JTextField custoTotalTexto = new JTextField(custoTotalString);
+			custoTotalTexto = new JTextField(custoTotalString);
 			custoTotalTexto.setFocusable(false);
 			painelCadastrarVenda.add(custoTotalTexto, gridCadastrarVenda);
-			
+
 			painelCadastrarVenda.setVisible(false);
 			painelCadastrarVenda.setVisible(true);
-			
+
 			y = y + 1;
+
+		} else if (e.getSource() == finalizarVenda){
+
+			String pagamentoString = pagamentoText.getText();
+			float pagamento = Float.parseFloat(pagamentoString);
+
+			String totalString = custoTotalTexto.getText();
+			float total = Float.parseFloat(totalString);
+
+			float troco = pagamento - total;
+			String trocoString = String.valueOf(troco);
+
+			trocoLabel.setText(trocoString);
+
+			SistemaFinal.cadastrarVenda(codigos, quantidades, pagamento, total, troco);
+
+			painelCadastrarVenda.setVisible(false);
+
+			painelCadastrarVenda();
+
+		} else if (e.getSource() == consultarVenda){
 			
+			if (dataVendasText.getText().isEmpty()){
+				System.out.println("O campo para data está vazio.");
+			} else {
+				
+				
+				int codigo = SistemaFinal.consultarVenda(dataVendasText.getText());
+				
+				SistemaFinal.detalharVenda(codigo);
+			
+			}
 		}
 	}
 }

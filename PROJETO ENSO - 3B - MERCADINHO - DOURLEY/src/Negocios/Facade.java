@@ -5,6 +5,8 @@ import java.sql.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
+import Persistencia.Banco;
+
 public class Facade {
 
 	private static Facade instance = new Facade();
@@ -67,6 +69,16 @@ public class Facade {
 		
 	}
 
+	public String detalharVenda(int codigo){
+	
+		Venda venda = Banco.getInstance().retornarVenda(codigo);
+		
+		String informacaoVenda = venda.toString();
+		
+		return informacaoVenda;
+		
+	}
+	
 	/**
 	 *Recebe um código referente a um produto para excluí-lo do Banco de dados 
 	 */
@@ -117,10 +129,18 @@ public class Facade {
 		venda.setTotal(total);
 	}
 
+	public void setTroco(float troco) {
+		venda.setTroco(troco);
+	}
+	
 	/**
 	 * Atribui o pagamento recebido pela venda
 	 */
 	public void setPagamentoVenda(float pagamento) {
 		venda.setPagamentoRecebido(pagamento);
+	}
+	
+	public float getTroco() {
+		return venda.getTroco();
 	}
 }
