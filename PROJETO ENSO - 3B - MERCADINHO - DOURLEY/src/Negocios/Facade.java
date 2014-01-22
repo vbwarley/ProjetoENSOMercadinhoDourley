@@ -68,12 +68,18 @@ public class Facade {
 		return Catalogo.consultarProduto(codigo);
 		
 	}
+	
+	
 
 	public String detalharVenda(int codigo){
 	
 		Venda venda = Banco.getInstance().retornarVenda(codigo);
 		
-		String informacaoVenda = venda.toString();
+		String informacaoVenda = "";
+		
+		if (venda != null)
+			informacaoVenda = venda.mostrarItens();
+			
 		
 		return informacaoVenda;
 		
