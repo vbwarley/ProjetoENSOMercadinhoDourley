@@ -60,6 +60,7 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	private JPanel painelManterProdutos;
 	private JPanel painelIncluirProduto;
 	private JPanel painelAlterarProduto;
+	private JPanel painelConsultarProduto;
 	
 	public ClasseGrafica () {
 		
@@ -346,6 +347,90 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		
 	}
 	
+	private void painelConsultarProduto() {
+		
+		painelConsultarProduto = new JPanel();
+		painelConsultarProduto.setBorder(BorderFactory.createTitledBorder("Consultar produto"));
+		painelConsultarProduto.setLayout(new GridBagLayout());
+		painelConsultarProduto.setSize(new Dimension(500, 500));
+		
+		this.add(BorderLayout.BEFORE_FIRST_LINE, painelConsultarProduto);
+		
+		GridBagConstraints gridConsultarProduto = new GridBagConstraints();
+		gridConsultarProduto.insets = new Insets(4, 4, 4, 4);
+		
+		gridConsultarProduto.gridx = 0;
+		gridConsultarProduto.gridy = 0;
+		JLabel codigoProdutoLabel = new JLabel("Codigo do produto");
+		painelConsultarProduto.add(codigoProdutoLabel, gridConsultarProduto);
+		
+		gridConsultarProduto.gridx = 1;
+		gridConsultarProduto.gridy = 0;
+		codigoProdutoText = new JTextField(15);
+		painelConsultarProduto.add(codigoProdutoText, gridConsultarProduto);
+		
+		gridConsultarProduto.gridx = 2;
+		gridConsultarProduto.gridy = 0;
+		botaoVerificarExistencia = new JButton("Verificar");
+		botaoVerificarExistencia.addActionListener(this);
+		painelConsultarProduto.add(botaoVerificarExistencia, gridConsultarProduto);
+		
+		gridConsultarProduto.gridx = 0;
+		gridConsultarProduto.gridy = 1;
+		JLabel nomeProdutoLabel = new JLabel("Nome do produto");
+		painelConsultarProduto.add(nomeProdutoLabel, gridConsultarProduto);
+		
+		gridConsultarProduto.gridx = 1;
+		gridConsultarProduto.gridy = 1;
+		nomeProdutoText = new JTextField(15);
+		painelConsultarProduto.add(nomeProdutoText, gridConsultarProduto);
+				
+		gridConsultarProduto.gridx = 0;
+		gridConsultarProduto.gridy = 2;
+		JLabel descricaoProdutoLabel = new JLabel("Descrição");
+		painelConsultarProduto.add(descricaoProdutoLabel, gridConsultarProduto);
+				
+		gridConsultarProduto.gridx = 1;
+		gridConsultarProduto.gridy = 2;
+		descricaoProdutoText = new JTextField(15);
+		painelConsultarProduto.add(descricaoProdutoText, gridConsultarProduto);
+		
+		gridConsultarProduto.gridx = 0;
+		gridConsultarProduto.gridy = 3;
+		JLabel precoProdutoLabel = new JLabel("Preço");
+		painelConsultarProduto.add(precoProdutoLabel, gridConsultarProduto);
+				
+		gridConsultarProduto.gridx = 1;
+		gridConsultarProduto.gridy = 3;
+		precoProdutoText = new JTextField(6);
+		painelConsultarProduto.add(precoProdutoText, gridConsultarProduto);
+		
+		gridConsultarProduto.gridx = 0;
+		gridConsultarProduto.gridy = 4;
+		JLabel unidadeProdutoLabel = new JLabel("Unidade");
+		painelConsultarProduto.add(unidadeProdutoLabel, gridConsultarProduto);
+				
+		gridConsultarProduto.gridx = 1;
+		gridConsultarProduto.gridy = 4;
+		unidadeProdutoText = new JTextField(8);
+		painelConsultarProduto.add(unidadeProdutoText, gridConsultarProduto);
+		
+		gridConsultarProduto.gridx = 1;
+		gridConsultarProduto.gridy = 5;
+		alterarProduto = new JButton("Alterar no banco de dados");
+		alterarProduto.addActionListener(this);
+		painelConsultarProduto.add(alterarProduto, gridConsultarProduto);
+		
+		gridConsultarProduto.gridx = 1;
+		gridConsultarProduto.gridy = 6;
+		botaoVoltarAlterarProduto = new JButton("Voltar...");
+		botaoVoltarAlterarProduto.addActionListener(this);
+		painelConsultarProduto.add(botaoVoltarAlterarProduto, gridConsultarProduto);
+		
+		painelConsultarProduto.setVisible(true);
+		
+	}
+	
 	private void painelIncluirProduto() {
 		
 		painelIncluirProduto = new JPanel();
@@ -414,7 +499,8 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		
 	}
 
-private void painelConsultarVenda() {
+
+	private void painelConsultarVenda() {
 		
 		JPanel painelConsultarVenda = new JPanel();
 		painelConsultarVenda.setBorder(BorderFactory.createTitledBorder("Consultar vendas"));
