@@ -92,6 +92,8 @@ public class SistemaFinal {
 	 **/
 	public static void incluirProduto(String nome, String desc, float preco, String unidade) {
 		Facade.getInstance().cadastrarProduto(nome, desc, preco, unidade);
+		
+		JOptionPane.showMessageDialog(null, "Produto incluido no sistema!");
 	}
 
 	/**

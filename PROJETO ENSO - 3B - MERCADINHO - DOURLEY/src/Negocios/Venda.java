@@ -169,6 +169,19 @@ public class Venda {
 			if (itens.isEmpty()) {
 				itens.add(item);
 				itens.get(itens.lastIndexOf(item)).setVenda(this); // PORRA, ESSA LINHA!! LEMBRE-SE SEMPRE DESSA LINHA!
+				
+			} else {
+				for (Item i : itens) {
+					if (i.getProduto().equals(p)) {
+						i.setQtdProduto(quantidade);
+						break;
+					} else if (itens.get(itens.size() - 1) == i) {
+						Item item2 = new Item(p, quantidade);
+						itens.add(item2);
+						itens.get(itens.lastIndexOf(item2)).setVenda(this); // PORRA, ESSA LINHA!! LEMBRE-SE SEMPRE DESSA LINHA!
+						break;
+					}	
+				}
 			} 
 		}
 	}

@@ -80,7 +80,13 @@ public class Banco {
 		Query query = manager.createQuery("select i from ItemVenda i");
 		List<Item> i = query.getResultList();
 			
-		return i.isEmpty();
+		boolean associado = false;
+		
+		for (Item it : i)
+			associado = it.getProduto().getCodProduto() == codigo ? true : false;
+		
+		
+		return associado;
 	}
 
 	/**
@@ -94,7 +100,7 @@ public class Banco {
 
 		if (p != null)
 			try {
-				if (verAssociacao(codigo)) {
+				if (!verAssociacao(codigo)) {
 					manager.getTransaction().begin();
 					manager.remove(p);
 					manager.getTransaction().commit();

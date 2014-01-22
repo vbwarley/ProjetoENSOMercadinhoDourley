@@ -657,7 +657,11 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 				float preco = Float.parseFloat(precoString);
 				String unidade = unidadeProdutoText.getText();
 
-				SistemaFinal.incluirProduto(nome, descricao, preco, unidade);	
+				SistemaFinal.incluirProduto(nome, descricao, preco, unidade);
+				
+				painelIncluirProduto.setVisible(false);
+				painelIncluirProduto();
+				
 			}
 
 		} else if (e.getSource() == alterarProduto){
@@ -678,6 +682,10 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 				SistemaFinal.alterarProduto(codigo, nome, descricao, preco, unidade);
 
 				JOptionPane.showMessageDialog(null, "Novos valores: "+"\nNome: "+nome+"\nDescrição: "+descricao+"\nPreço: "+preco+"\nUnidade: "+unidade);
+				
+				painelAlterarProduto.setVisible(false);
+				painelAlterarProduto();
+				
 			}
 		} else if (e.getSource() == consultarProduto){
 
@@ -685,6 +693,10 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 			int codigo = Integer.parseInt(codigoString);
 
 			SistemaFinal.consultarProduto(codigo);
+			
+			painelConsultarProduto.setVisible(false);
+			painelConsultarProduto();
+			
 
 		} else if (e.getSource() == excluirProduto){
 
@@ -786,6 +798,9 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 				int codigo = SistemaFinal.consultarVenda(dataVendasText.getText());
 				
 				SistemaFinal.detalharVenda(codigo);
+				
+				painelConsultarVenda.setVisible(false);
+				painelConsultarVenda();
 			
 			}
 		}
