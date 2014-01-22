@@ -50,6 +50,9 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	private JButton botaoVoltarAlterarProduto;
 	private JButton botaoConsultarProduto;
 	private JButton botaoVoltarConsultarProduto;
+	private JButton botaoExcluirProduto;
+	private JButton botaoVoltarExcluirProduto;
+	private JButton botaoVoltarConsultarVenda;
 	private JTextField quantidadeProdutoText;
 	private JTextField dataVendasText;
 	private JTextField nomeProdutoText;
@@ -64,6 +67,8 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	private JPanel painelIncluirProduto;
 	private JPanel painelAlterarProduto;
 	private JPanel painelConsultarProduto;
+	private JPanel painelExcluirProduto;
+	private JPanel painelConsultarVenda;
 	
 	public ClasseGrafica () {
 		
@@ -395,6 +400,51 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		
 	}
 	
+	private void painelExcluirProduto() {
+		
+		painelExcluirProduto = new JPanel();
+		painelExcluirProduto.setBorder(BorderFactory.createTitledBorder("Excluir produto"));
+		painelExcluirProduto.setLayout(new GridBagLayout());
+		painelExcluirProduto.setSize(new Dimension(500, 500));
+		
+		this.add(BorderLayout.BEFORE_FIRST_LINE, painelExcluirProduto);
+		
+		GridBagConstraints gridConsultarProduto = new GridBagConstraints();
+		gridConsultarProduto.insets = new Insets(4, 4, 4, 4);
+		
+		gridConsultarProduto.gridx = 0;
+		gridConsultarProduto.gridy = 0;
+		JLabel codigoProdutoLabel = new JLabel("Codigo do produto");
+		painelExcluirProduto.add(codigoProdutoLabel, gridConsultarProduto);
+		
+		gridConsultarProduto.gridx = 1;
+		gridConsultarProduto.gridy = 0;
+		codigoProdutoText = new JTextField(15);
+		painelExcluirProduto.add(codigoProdutoText, gridConsultarProduto);
+		
+		gridConsultarProduto.gridx = 2;
+		gridConsultarProduto.gridy = 0;
+		botaoVerificarExistencia = new JButton("Verificar");
+		botaoVerificarExistencia.addActionListener(this);
+		painelExcluirProduto.add(botaoVerificarExistencia, gridConsultarProduto);
+		
+		gridConsultarProduto.gridx = 1;
+		gridConsultarProduto.gridy = 1;
+		botaoExcluirProduto = new JButton("Excluir");
+		botaoExcluirProduto.addActionListener(this);
+		painelExcluirProduto.add(botaoExcluirProduto, gridConsultarProduto);
+		
+		gridConsultarProduto.gridx = 2;
+		gridConsultarProduto.gridy = 1;
+		botaoVoltarExcluirProduto = new JButton("Voltar");
+		botaoVoltarExcluirProduto.addActionListener(this);
+		painelExcluirProduto.add(botaoVoltarExcluirProduto, gridConsultarProduto);
+		
+		
+		painelExcluirProduto.setVisible(true);
+		
+	}
+	
 	private void painelIncluirProduto() {
 		
 		painelIncluirProduto = new JPanel();
@@ -466,7 +516,7 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 
 	private void painelConsultarVenda() {
 		
-		JPanel painelConsultarVenda = new JPanel();
+		painelConsultarVenda = new JPanel();
 		painelConsultarVenda.setBorder(BorderFactory.createTitledBorder("Consultar vendas"));
 		painelConsultarVenda.setLayout(new GridBagLayout());
 		painelConsultarVenda.setSize(new Dimension(500, 500));
@@ -491,6 +541,12 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		botaoConsultarVenda = new JButton("Consultar");
 		botaoConsultarVenda.addActionListener(this);
 		painelConsultarVenda.add(botaoConsultarVenda, gridConsultaVendas);
+		
+		gridConsultaVendas.gridx = 1;
+		gridConsultaVendas.gridy = 1;
+		botaoVoltarConsultarVenda = new JButton("Voltar...");
+		botaoVoltarConsultarVenda.addActionListener(this);
+		painelConsultarVenda.add(botaoVoltarConsultarVenda, gridConsultaVendas);
 		
 		painelConsultarVenda.setVisible(true);
 		
@@ -534,6 +590,13 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 			painelManterProdutos.setVisible(true);
 		} else if (e.getSource() == botaoVoltarManterProdutos){
 			painelManterProdutos.setVisible(false);
+			painel.setVisible(true);
+		} else if (e.getSource() == botaoOkExcluir){
+			painel.setVisible(false);
+			painelManterProdutos.setVisible(false);
+			painelExcluirProduto();
+		} else if (e.getSource() == botaoVoltarConsultarVenda){
+			painelConsultarVenda.setVisible(false);
 			painel.setVisible(true);
 		}
 		
