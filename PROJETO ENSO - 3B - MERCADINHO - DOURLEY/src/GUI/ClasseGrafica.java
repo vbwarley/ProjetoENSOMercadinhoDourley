@@ -1,31 +1,22 @@
 package GUI;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.LayoutManager;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.concurrent.Delayed;
 
-import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
 public class ClasseGrafica extends JFrame implements ActionListener{
 
@@ -49,7 +40,7 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	private JButton botaoVoltarAlterarProduto;
 	private JButton consultarProduto;
 	private JButton botaoVoltarConsultarProduto;
-	private JButton botaoExcluirProduto;
+	private JButton excluirProduto;
 	private JButton botaoVoltarExcluirProduto;
 	private JButton botaoVoltarConsultarVenda;
 	private JButton botaoVoltarCadastrarVenda;
@@ -70,7 +61,19 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	private JPanel painelExcluirProduto;
 	private JPanel painelConsultarVenda;
 	private JPanel painelCadastrarVenda;
-
+	private JTextField pagamentoText;
+	
+	//ArrayList para cadastrar venda
+	private ArrayList<Integer> codigos = new ArrayList<Integer>();
+	private ArrayList<Integer> quantidades = new ArrayList<Integer>();
+	private float custoTotalVenda = 0; 
+	
+	//Configuração do grid em cadastrarVendas
+	private int x1 = 0; //primeira coluna
+	private int x2 = 1; //segunda coluna
+	private int x3 = 2; //Terceira coluna
+	private int y = 8; //Linha inicial
+	
 	public ClasseGrafica () {
 
 		super("Mercadinho do Zé");
@@ -262,14 +265,24 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		adicionaAoCarrinho.addActionListener(this);
 		painelCadastrarVenda.add(adicionaAoCarrinho, gridVendas);
 
+		gridVendas.gridx = 0;
+		gridVendas.gridy = 4;
+		JLabel pagamentoLabel = new JLabel("Pagamento");
+		painelCadastrarVenda.add(pagamentoLabel, gridVendas);
+
 		gridVendas.gridx = 1;
 		gridVendas.gridy = 4;
+		pagamentoText = new JTextField(6);
+		painelCadastrarVenda.add(pagamentoText, gridVendas);
+
+		gridVendas.gridx = 1;
+		gridVendas.gridy = 5;
 		finalizarVenda = new JButton("finalizar venda");
 		finalizarVenda.addActionListener(this);
 		painelCadastrarVenda.add(finalizarVenda, gridVendas);
 
 		gridVendas.gridx = 2;
-		gridVendas.gridy = 5;
+		gridVendas.gridy = 6;
 		botaoVoltarCadastrarVenda = new JButton("Voltar...");
 		botaoVoltarCadastrarVenda.addActionListener(this);
 		painelCadastrarVenda.add(botaoVoltarCadastrarVenda, gridVendas);
@@ -437,9 +450,9 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 
 		gridConsultarProduto.gridx = 1;
 		gridConsultarProduto.gridy = 1;
-		botaoExcluirProduto = new JButton("Excluir");
-		botaoExcluirProduto.addActionListener(this);
-		painelExcluirProduto.add(botaoExcluirProduto, gridConsultarProduto);
+		excluirProduto = new JButton("Excluir");
+		excluirProduto.addActionListener(this);
+		painelExcluirProduto.add(excluirProduto, gridConsultarProduto);
 
 		gridConsultarProduto.gridx = 2;
 		gridConsultarProduto.gridy = 1;
@@ -620,7 +633,7 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 			if (nomeProdutoText.getText().isEmpty() || descricaoProdutoText.getText().isEmpty() || unidadeProdutoText.getText().isEmpty() || precoProdutoText.getText().isEmpty()){
 
 
-				JOptionPane.showMessageDialog(null, "Algum campo está vazio, ou o campo preço tem zero \n");
+				JOptionPane.showMessageDialog(null, "Algum campo está vazio");
 
 			} else {
 				String nome = nomeProdutoText.getText();
@@ -634,9 +647,9 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 
 		} else if (e.getSource() == alterarProduto){
 
-			if (nomeProdutoText.getText().isEmpty() || descricaoProdutoText.getText().isEmpty() || unidadeProdutoText.getText().isEmpty() || precoProdutoText.getText().isEmpty()){
+			if (codigoProdutoText.getText().isEmpty() || nomeProdutoText.getText().isEmpty() || descricaoProdutoText.getText().isEmpty() || unidadeProdutoText.getText().isEmpty() || precoProdutoText.getText().isEmpty()){
 
-				JOptionPane.showMessageDialog(null, "Algum campo está vazio, ou o campo preço tem zero \n");
+				JOptionPane.showMessageDialog(null, "Algum campo está vazio");
 
 			} else {
 				String codigoString = codigoProdutoText.getText();
@@ -657,6 +670,77 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 			int codigo = Integer.parseInt(codigoString);
 			
 			SistemaFinal.consultarProduto(codigo);
+			
+		} else if (e.getSource() == excluirProduto){
+			
+			String codigoString = codigoProdutoText.getText();
+			int codigo = Integer.parseInt(codigoString);
+			
+			SistemaFinal.excluirProduto(codigo);
+		} else if (e.getSource() == adicionaAoCarrinho){
+			
+			GridBagConstraints gridCadastrarVenda = new GridBagConstraints();
+			gridCadastrarVenda.insets = new Insets(2, 2, 2, 2);
+			
+			gridCadastrarVenda.gridx = x1;
+			gridCadastrarVenda.gridy = 7;
+			
+			//Modifica y que é referente a proxima linha vazia
+			
+			JLabel codigoProdutoLabel = new JLabel("Código");
+			painelCadastrarVenda.add(codigoProdutoLabel, gridCadastrarVenda);
+			
+			gridCadastrarVenda.gridx = x2;
+			JLabel quantidadeTextoLabel = new JLabel("Quantidade");
+			painelCadastrarVenda.add(quantidadeTextoLabel, gridCadastrarVenda);
+			
+			gridCadastrarVenda.gridx = x3;
+			JLabel custoTextoLabel = new JLabel("Custo");
+			painelCadastrarVenda.add(custoTextoLabel, gridCadastrarVenda);
+			
+			String codigoString = codigoProdutoText.getText();
+			int codigo = Integer.parseInt(codigoString);
+			codigos.add(codigo);
+			
+			String quantidadeString = quantidadeProdutoText.getText();
+			int quantidade = Integer.parseInt(quantidadeString);
+			quantidades.add(quantidade);
+			
+			float custo = SistemaFinal.calcularCusto(codigo, quantidade);
+			custoTotalVenda = custoTotalVenda + custo;
+			
+			String custoString = String.valueOf(custo);
+			String custoTotalString = String.valueOf(custoTotalVenda);
+			
+			gridCadastrarVenda.gridx = x1;
+			gridCadastrarVenda.gridy = y;
+			
+			JLabel codigoProdutoTexto = new JLabel(codigoString);
+			painelCadastrarVenda.add(codigoProdutoTexto, gridCadastrarVenda);
+			
+			gridCadastrarVenda.gridx = x2;
+			JLabel quantidadeTexto = new JLabel(quantidadeString);
+			painelCadastrarVenda.add(quantidadeTexto, gridCadastrarVenda);
+			
+			gridCadastrarVenda.gridx = x3;
+			JLabel custoTexto = new JLabel(custoString);
+			painelCadastrarVenda.add(custoTexto, gridCadastrarVenda);
+
+			gridCadastrarVenda.gridx = x3+1;
+			gridCadastrarVenda.gridy = 7;
+			
+			JLabel custoTotalLabel = new JLabel("Total: ");
+			painelCadastrarVenda.add(custoTotalLabel, gridCadastrarVenda);
+			
+			gridCadastrarVenda.gridy = 8;
+			JTextField custoTotalTexto = new JTextField(custoTotalString);
+			custoTotalTexto.setFocusable(false);
+			painelCadastrarVenda.add(custoTotalTexto, gridCadastrarVenda);
+			
+			painelCadastrarVenda.setVisible(false);
+			painelCadastrarVenda.setVisible(true);
+			
+			y = y + 1;
 			
 		}
 	}

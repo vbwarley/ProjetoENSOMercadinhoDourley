@@ -49,7 +49,19 @@ public class Facade {
 		return produto.toString();
 	}
 	
-	public static Produto verificarProduto(int codigo){
+	public float calcularCusto(int codigo, int quantidade){
+		
+		float custo = 0;
+		
+		Produto produto = Catalogo.consultarProduto(codigo);
+		
+		custo = produto.getPrecoProduto()*quantidade;
+		
+		return custo;
+		
+	}
+	
+	public Produto verificarProduto(int codigo){
 		
 		return Catalogo.consultarProduto(codigo);
 		

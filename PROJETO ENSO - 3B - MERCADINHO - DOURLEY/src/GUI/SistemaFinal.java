@@ -28,9 +28,17 @@ public class SistemaFinal {
 
 	}
 	
+	public static float calcularCusto(int codigo, int quantidade){
+		
+		float custo = Facade.getInstance().calcularCusto(codigo, quantidade);
+		
+		return custo;
+		
+	}
+	
 	public static void verificarProduto(int codigo){
 
-		if (Facade.verificarProduto(codigo) == null){
+		if (Facade.getInstance().verificarProduto(codigo) == null){
 			JOptionPane.showMessageDialog(null, "O código digitado é inválido, tente novamente");
 		} else {
 			JOptionPane.showMessageDialog(null, "O código digitado é válido, clique em OK para prosseguir... \n");
@@ -85,6 +93,7 @@ public class SistemaFinal {
 	 **/
 	public static void excluirProduto(int codigo) {
 		Facade.getInstance().excluirProduto(codigo);
+		JOptionPane.showMessageDialog(null, "Produto excluído com sucesso.");
 	}
 
 	/**
