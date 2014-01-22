@@ -77,9 +77,8 @@ public class Banco {
 	
 	private boolean verAssociacao(int codigo) {
 		// aqui está dando erro
-		Query query = manager.createQuery("SELECT p FROM Venda v, Produto p, ItemVenda i "
-				+ "WHERE v.codVenda = i.codVenda AND p.codProduto = i.codProduto AND p.codProduto = " + codigo);
-		List<Produto> i = query.getResultList();
+		Query query = manager.createQuery("select i from ItemVenda i");
+		List<Item> i = query.getResultList();
 			
 		return i.isEmpty();
 	}

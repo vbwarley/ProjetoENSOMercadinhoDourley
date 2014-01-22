@@ -63,9 +63,9 @@ public class Facade {
 		
 	}
 	
-	public Produto verificarProduto(int codigo){
+	public boolean verificarProduto(int codigo){
 		
-		return Catalogo.consultarProduto(codigo);
+		return Catalogo.consultarProduto(codigo) == null ? true : false;
 		
 	}
 	
@@ -119,13 +119,6 @@ public class Facade {
 	 */
 	public void inserirItemVenda(int codigo, int quantidade) {
 		venda.insereItem(codigo, quantidade);
-	}
-
-	/**
-	 * Calcula o valor total da venda
-	 */
-	public float valorTotal() {
-		return venda.getTotal();
 	}
 
 	/**

@@ -54,7 +54,7 @@ public class SistemaFinal {
 
 	public static void verificarProduto(int codigo){
 
-		if (Facade.getInstance().verificarProduto(codigo) == null){
+		if (Facade.getInstance().verificarProduto(codigo)){
 			JOptionPane.showMessageDialog(null, "O código digitado é inválido, tente novamente");
 		} else {
 			JOptionPane.showMessageDialog(null, "O código digitado é válido, clique em OK para prosseguir... \n");
