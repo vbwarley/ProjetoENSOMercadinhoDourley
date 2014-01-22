@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.concurrent.Delayed;
 
+import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -38,7 +39,7 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	private JButton botaoOkAlterar;
 	private JButton botaoOkConsultarProduto;
 	private JButton botaoOkExcluir;
-	private JButton botaoSairProdutos;
+	private JButton botaoVoltarManterProdutos;
 	private JButton botaoVerificarExistencia;
 	private JButton incluirProduto;
 	private JButton adicionaAoCarrinho;
@@ -47,6 +48,8 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	private JButton alterarProduto;
 	private JButton botaoVoltarInclusaoProdutos;
 	private JButton botaoVoltarAlterarProduto;
+	private JButton botaoConsultarProduto;
+	private JButton botaoVoltarConsultarProduto;
 	private JTextField quantidadeProdutoText;
 	private JTextField dataVendasText;
 	private JTextField nomeProdutoText;
@@ -54,7 +57,6 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 	private JTextField precoProdutoText;
 	private JTextField unidadeProdutoText;
 	private JTextField codigoProdutoText;
-	private JButton botaoConsultarProduto;
 	
 	//Paineis
 	private JPanel painel;
@@ -201,9 +203,9 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		
 		gridVendas.gridx = 1;
 		gridVendas.gridy = 4;
-		botaoSairProdutos = new JButton("OK");
-		botaoSairProdutos.addActionListener(this);
-		painelManterProdutos.add(botaoSairProdutos, gridVendas);
+		botaoVoltarManterProdutos = new JButton("OK");
+		botaoVoltarManterProdutos.addActionListener(this);
+		painelManterProdutos.add(botaoVoltarManterProdutos, gridVendas);
 		
 		painelManterProdutos.setVisible(true);
 		this.add(BorderLayout.BEFORE_FIRST_LINE, painelManterProdutos);
@@ -382,6 +384,12 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		botaoConsultarProduto.addActionListener(this);
 		painelConsultarProduto.add(botaoConsultarProduto, gridConsultarProduto);
 		
+		gridConsultarProduto.gridx = 2;
+		gridConsultarProduto.gridy = 1;
+		botaoVoltarConsultarProduto = new JButton("Voltar");
+		botaoVoltarConsultarProduto.addActionListener(this);
+		painelConsultarProduto.add(botaoVoltarConsultarProduto, gridConsultarProduto);
+		
 		
 		painelConsultarProduto.setVisible(true);
 		
@@ -521,6 +529,12 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 			painel.setVisible(false);
 			painelManterProdutos.setVisible(false);
 			painelConsultarProduto();
+		} else if (e.getSource() == botaoVoltarConsultarProduto){
+			painelConsultarProduto.setVisible(false);
+			painelManterProdutos.setVisible(true);
+		} else if (e.getSource() == botaoVoltarManterProdutos){
+			painelManterProdutos.setVisible(false);
+			painel.setVisible(true);
 		}
 		
 	}
