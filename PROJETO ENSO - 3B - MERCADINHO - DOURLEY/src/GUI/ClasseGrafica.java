@@ -606,6 +606,9 @@ public class ClasseGrafica extends JFrame implements ActionListener{
 		} else if (e.getSource() == botaoVoltarInclusaoProdutos){
 			painelIncluirProduto.setVisible(false);
 			painelManterProdutos.setVisible(true);
+		} else if (e.getSource() == botaoVoltarExcluirProduto){
+			painelExcluirProduto.setVisible(false);
+			painelManterProdutos.setVisible(true);
 		} else if (e.getSource() == botaoOkAlterar){
 			painel.setVisible(false);
 			painelManterProdutos.setVisible(false);
